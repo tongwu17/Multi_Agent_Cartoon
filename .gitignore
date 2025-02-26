@@ -1,0 +1,5 @@
+.venv/
+*.pyc
+.gitattributes
+.mailmap
+__pycache__/
