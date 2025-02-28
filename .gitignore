@@ -4,3 +4,4 @@
 .mailmap
 .gitignore
 __pycache__/
+package-lock.json
