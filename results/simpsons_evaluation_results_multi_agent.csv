@@ -1,0 +1,9 @@
+question_id,question,answer_type,truth_answer,predicted_answer,accuracy
+77311,what is on the shelf?,other,book,book,1.0
+12809,how many people are in the picture?,number,1,There is one person in the picture.,1.0
+1214,are the people sitting or standing?,other,standing,The characters in the image are standing.,1.0
+88112,what is the group of people doing?,other,standing,"The group of characters from ""The Simpsons"" is standing together in an airport terminal, likely waiting for a flight or preparing to travel.",1.0
+36705,what are the buildings made of?,other,brick,"The buildings in the image are made of brick, as indicated by the description of the dimly lit alleyway with a brick wall.",1.0
+33098,is there a toy in the picture?,yes/no,yes,"Yes, there is a toy in the picture. The character is designed in a LEGO style, and the background features a LEGO-style building.",1.0
+30161,is there a man on a chair?,yes/no,yes,"Yes, there is a man leaning slightly forward in a lively setting.",1.0
+Average,Total Questions: 7,All,,,1.0

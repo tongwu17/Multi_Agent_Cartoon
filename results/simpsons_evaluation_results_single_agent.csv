@@ -1,9 +1,9 @@
 question_id,question,answer_type,truth_answer,predicted_answer,accuracy
-77311,what is on the shelf?,other,book,"I can't see the details of the shelf in the image. If you describe what's on it, I can help with more information!",0.0
-12809,how many people are in the picture?,number,1,There is one person in the picture.,100.0
-1214,are the people sitting or standing?,other,standing,The people in the image are standing.,100.0
-88112,what is the group of people doing?,other,standing,"The group of people is waiting in an airport terminal. They appear to be preparing for travel, as indicated by their luggage and the airport setting. Some are interacting with devices, while others are looking around or waiting for their flight.",50.0
-36705,what are the buildings made of?,other,brick,"The buildings in the image appear to be made of brick, as indicated by the red brick wall in the background. The setting also includes various elements like trash and a bucket, which suggest an urban environment.",100.0
-33098,is there a toy in the picture?,yes/no,yes,"Yes, there are toys in the picture. It features a character that resembles a LEGO figure, along with various LEGO bricks scattered around.",100.0
+77311,what is on the shelf?,other,book,"I'm unable to see the specific details of the shelf in the image. If you describe what's on the shelf, I can help answer questions or provide more information!",0.0
+12809,how many people are in the picture?,number,1,There is one person in the picture.,1.0
+1214,are the people sitting or standing?,other,standing,The people in the image are standing.,1.0
+88112,what is the group of people doing?,other,standing,"The group of people in the image appears to be at an airport, likely waiting for a flight. They are standing in a terminal area, with some individuals engaged in activities like looking at devices or interacting with each other. The presence of a flag and gate numbers suggests they are preparing for travel.",0.75
+36705,what are the buildings made of?,other,brick,"The buildings in the image appear to be made of brick, as indicated by the red brick wall in the background. Additionally, there are elements like metal pipes and possibly concrete or other materials visible in the scene.",1.0
+33098,is there a toy in the picture?,yes/no,yes,"Yes, there are toys in the picture, specifically LEGO bricks.",1.0
 30161,is there a man on a chair?,yes/no,yes,"Yes, there is a man sitting at a piano in the image.",0.0
-Average,Total Questions: 7,All,,,64.28571428571429
+Average,Total Questions: 7,All,,,0.6785714285714286
