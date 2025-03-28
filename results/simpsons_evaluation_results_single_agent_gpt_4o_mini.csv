@@ -1,0 +1,9 @@
+question_id,question,answer_type,truth_answer,predicted_answer,accuracy
+77311,what is on the shelf?,other,book,"I'm unable to see the specific details of the shelf in the image. If you can describe what's on the shelf, I can help you with more information or context!",0.0
+12809,how many people are in the picture?,number,1,The image features one character.,1.0
+1214,are the people sitting or standing?,other,standing,The people in the image are standing.,1.0
+88112,what is the group of people doing?,other,standing,"The group of people is at an airport, likely waiting for a flight. They appear to be preparing for travel, with some individuals looking at devices and others standing together, possibly discussing their plans.",0.75
+36705,what are the buildings made of?,other,brick,"The buildings in the image appear to be made of brick, as indicated by the red brick wall in the background. The setting also includes various trash and debris, typical of an urban environment.",1.0
+33098,is there a toy in the picture?,yes/no,yes,"Yes, there are toys in the picture, specifically LEGO bricks scattered around the scene.",1.0
+30161,is there a man on a chair?,yes/no,yes,"Yes, there is a man standing next to a woman and a piano in the image. However, there is no man sitting on a chair.",0.0
+Average,Total Questions: 7,All,,,0.6785714285714286

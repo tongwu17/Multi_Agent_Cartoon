@@ -1,0 +1,9 @@
+question_id,question,answer_type,truth_answer,predicted_answer,accuracy
+77311,what is on the shelf?,other,book,corrected answer,0.0
+12809,how many people are in the picture?,number,1,There is one person in the picture.,1.0
+1214,are the people sitting or standing?,other,standing,The characters in the image are standing.,1.0
+88112,what is the group of people doing?,other,standing,"The Simpson family is at the airport terminal, likely waiting for their flight. Homer appears surprised, possibly looking at a device, while the rest of the family is gathered around him.",0.25
+36705,what are the buildings made of?,other,brick,"The buildings in the image are made of brick, as indicated by the description of the background featuring a brick wall.",1.0
+33098,is there a toy in the picture?,yes/no,yes,"Yes, there are toy blocks in the picture, as indicated by the description of the character and the surrounding environment.",1.0
+30161,is there a man on a chair?,yes/no,yes,"Yes, there is a man on a chair in the image.",1.0
+Average,Total Questions: 7,All,,,0.75
