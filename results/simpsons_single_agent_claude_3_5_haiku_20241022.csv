@@ -1,0 +1,16 @@
+question_id,question,answer_type,truth_answer,predicted_answer,accuracy
+77311,what is on the shelf?,other,book,Books,0.75
+12809,how many people are in the picture?,number,1,One,1.0
+1214,are the people sitting or standing?,other,standing,Standing,1.0
+88112,what is the group of people doing?,other,standing,Waiting,0.75
+36705,what are the buildings made of?,other,brick,Bricks,1.0
+33098,is there a toy in the picture?,yes/no,yes,Yes.,1.0
+30161,is there a man on a chair?,yes/no,yes,Yes.,1.0
+15712,how many people are there?,number,2,Two,1.0
+87724,what is the girl doing?,other,standing,Posing,0.75
+12264,how many people are in the image?,number,1,One.,1.0
+81928,what is the character doing?,other,standing,Peeking,0.0
+88069,what is the group of people doing?,other,sitting,Sitting,1.0
+66444,what color suit is the man on the left wearing?,other,blue,Blue,1.0
+11251,how many people are at the table?,number,2,Two,1.0
+Average,Total Questions: 14,All,,,0.875
