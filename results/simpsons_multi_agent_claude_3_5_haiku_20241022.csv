@@ -1,9 +1,38 @@
 question_id,question,answer_type,truth_answer,predicted_answer,accuracy
-77311,what is on the shelf?,other,book,"Based on the image, the bookshelf contains several books in different colors (green, blue, purple, red) and what appears to be a round orange object or paperweight. The books are neatly arranged on the shelf, which is located near the character's nameplate identifying him as ""Interim Principal of the Year, Seymour Skinner"".",1.0
-12809,how many people are in the picture?,number,1,"Based on the image and description, there is 1 cartoon character in the picture - a yellow-skinned character (Lisa Simpson from The Simpsons) wearing a black bowler hat, white shirt, black vest, and polka dot tie, with a tense or anxious facial expression against a brownish-orange background.",1.0
-1214,are the people sitting or standing?,other,standing,"Based on the image, all the characters are standing. They appear to be in an office or workplace setting, wearing name badges, and positioned upright in a group. No characters are seated in this scene from The Simpsons.",1.0
-88112,what is the group of people doing?,other,standing,"Based on the image, the Simpson family is standing in a French airport terminal, facing away from the viewer. They appear to be waiting or preparing to move through the airport, with their backs to the audience. The scene shows them standing on a red carpeted floor, surrounded by airport seating areas, with a French flag hanging from the curved, architectural ceiling. The family members are wearing their characteristic colors and styles, with backpacks, suggesting they are in transit or preparing for a journey.",1.0
-36705,what are the buildings made of?,other,brick,"Based on the image, the buildings are made of red bricks. The background shows a brick wall with clearly defined brick texture and coloration, indicating that the structures in this Simpsons scene are constructed from brick masonry.",1.0
-33098,is there a toy in the picture?,yes/no,yes,"Yes, there are multiple toys in the picture. The entire scene is rendered in a LEGO-style environment, with a Bart Simpson character designed like a LEGO minifigure, standing on a green LEGO baseplate. The background and surrounding objects are also constructed like LEGO blocks and pieces, making the entire image a toy-themed representation of the Simpsons character and setting.",1.0
-30161,is there a man on a chair?,yes/no,yes,"Yes, there is a man seated at a piano (on the right side of the image). He is wearing a white shirt and appears to be resting or relaxed. This is a scene from The Simpsons with characters in the show's distinctive yellow skin tone, including a bassist on the left, a woman in a purple dress, and a man in a teal suit.",1.0
-Average,Total Questions: 7,All,,,1.0
+77311,what is on the shelf?,other,book,Books,0.75
+12809,how many people are in the picture?,number,1,One,1.0
+1214,are the people sitting or standing?,other,standing,Standing,1.0
+88112,what is the group of people doing?,other,standing,standing,1.0
+36705,what are the buildings made of?,other,brick,Brick,1.0
+33098,is there a toy in the picture?,yes/no,yes,"Yes, there are multiple toy-like LEGO blocks/objects in the picture, so the answer is technically correct and supported by the evidence.",1.0
+30161,is there a man on a chair?,yes/no,yes,"No, there is not a man on a chair. There are several characters standing near a piano and a cellist, but no one is specifically sitting on a chair.",0.0
+15712,how many people are there?,number,2,Two,1.0
+87724,what is the girl doing?,other,standing,standing,1.0
+12264,how many people are in the image?,number,1,One,1.0
+81928,what is the character doing?,other,standing,standing,1.0
+88069,what is the group of people doing?,other,sitting,Sitting,1.0
+66444,what color suit is the man on the left wearing?,other,blue,Blue,1.0
+11251,how many people are at the table?,number,2,Two,1.0
+71663,what is in the background?,other,sky,Sky,1.0
+52604,what color is the man's hat?,other,blue,Blue,1.0
+1641,are the people standing or sitting?,other,standing,Standing,1.0
+1572,are the people standing or sitting?,other,standing,Standing,1.0
+11822,how many people are in the image?,number,2,Two,1.0
+29597,is there a human in the picture?,yes/no,yes,Yes,1.0
+31735,is there a pool table?,yes/no,yes,Yes,1.0
+61532,what color is the table?,other,blue,"The evidence does not specify the table color. While the image shows a lunch table, the color of the table is not explicitly stated or clearly identifiable from the description or image. Without definitive color information, the prediction cannot be confidently verified.",0.0
+72617,what is in the background?,other,building,building,1.0
+1386,are the people standing in a line?,yes/no,yes,yes,1.0
+68247,what is behind the men?,other,fence,fence,1.0
+26965,is there a bridge in the photo?,yes/no,yes,Yes,1.0
+85910,what is the color of the sky?,other,blue,Blue,1.0
+78721,what is on the table?,other,suitcase,Suitcase,1.0
+84446,what is the color of the man's shirt on the left?,other,blue,blue,1.0
+66434,what color suit is the character wearing?,other,blue,Navy,0.75
+52356,what color is the man's hair?,other,blue,Blue,1.0
+29887,is there a light hanging?,yes/no,yes,Yes,1.0
+55433,what color is the man's shirt?,other,white,White,1.0
+71583,what is in the background?,other,table,table,1.0
+37083,what are the men doing?,other,standing,standing,1.0
+96818,what is the person sitting on?,other,chair,Chair.,1.0
+Average,Total Questions: 36,All,,,0.9305555555555556
