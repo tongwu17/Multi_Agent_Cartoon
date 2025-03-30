@@ -1,38 +1,38 @@
-question_id,question,answer_type,truth_answer,predicted_answer,accuracy
-77311,what is on the shelf?,other,book,Books,0.75
-12809,how many people are in the picture?,number,1,One.,1.0
-1214,are the people sitting or standing?,other,standing,Standing.,1.0
-88112,what is the group of people doing?,other,standing,Traveling,0.0
-36705,what are the buildings made of?,other,brick,Brick,1.0
-33098,is there a toy in the picture?,yes/no,yes,Yes.,1.0
-30161,is there a man on a chair?,yes/no,yes,No.,0.0
-15712,how many people are there?,number,2,Two,1.0
-87724,what is the girl doing?,other,standing,Reacting,0.0
-12264,how many people are in the image?,number,1,One.,1.0
-81928,what is the character doing?,other,standing,Peeking.,0.0
-88069,what is the group of people doing?,other,sitting,Watching,0.0
-66444,what color suit is the man on the left wearing?,other,blue,Blue,1.0
-11251,how many people are at the table?,number,2,Two,1.0
-71663,what is in the background?,other,sky,Blue,0.25
-52604,what color is the man's hat?,other,blue,Blue,1.0
-1641,are the people standing or sitting?,other,standing,Standing,1.0
-1572,are the people standing or sitting?,other,standing,Standing,1.0
-11822,how many people are in the image?,number,2,Two,1.0
-29597,is there a human in the picture?,yes/no,yes,Yes.,1.0
-31735,is there a pool table?,yes/no,yes,Yes.,1.0
-61532,what color is the table?,other,blue,Green,0.0
-72617,what is in the background?,other,building,Storefronts,0.0
-1386,are the people standing in a line?,yes/no,yes,No.,0.0
-68247,what is behind the men?,other,fence,Cage,0.0
-26965,is there a bridge in the photo?,yes/no,yes,Yes.,1.0
-85910,what is the color of the sky?,other,blue,Blue,1.0
-78721,what is on the table?,other,suitcase,Suitcase,1.0
-84446,what is the color of the man's shirt on the left?,other,blue,Blue,1.0
-66434,what color suit is the character wearing?,other,blue,Blue,1.0
-52356,what color is the man's hair?,other,blue,Blue,1.0
-29887,is there a light hanging?,yes/no,yes,Yes.,1.0
-55433,what color is the man's shirt?,other,white,White,1.0
-71583,what is in the background?,other,table,Gameboard,0.0
-37083,what are the men doing?,other,standing,Performing,0.0
-96818,what is the person sitting on?,other,chair,Chair,1.0
-Average,Total Questions: 36,All,,,0.6666666666666666
+row_num,question_id,question,answer_type,truth_answer,predicted_answer,accuracy
+1,77311,what is on the shelf?,other,book,Books,0.75
+2,12809,how many people are in the picture?,number,1,One.,1.0
+3,1214,are the people sitting or standing?,other,standing,Standing,1.0
+4,88112,what is the group of people doing?,other,standing,Traveling,0.0
+5,36705,what are the buildings made of?,other,brick,Brick,1.0
+6,33098,is there a toy in the picture?,yes/no,yes,Yes.,1.0
+7,30161,is there a man on a chair?,yes/no,yes,Yes.,1.0
+8,15712,how many people are there?,number,2,Two,1.0
+9,87724,what is the girl doing?,other,standing,Thinking,0.0
+10,12264,how many people are in the image?,number,1,One.,1.0
+11,81928,what is the character doing?,other,standing,Peeking,0.0
+12,88069,what is the group of people doing?,other,sitting,Watching,0.0
+13,66444,what color suit is the man on the left wearing?,other,blue,Blue,1.0
+14,11251,how many people are at the table?,number,2,Two,1.0
+15,71663,what is in the background?,other,sky,Blue,0.0
+16,52604,what color is the man's hat?,other,blue,Blue,1.0
+17,1641,are the people standing or sitting?,other,standing,Standing,1.0
+18,1572,are the people standing or sitting?,other,standing,Standing,1.0
+19,11822,how many people are in the image?,number,2,Two,1.0
+20,29597,is there a human in the picture?,yes/no,yes,Yes.,1.0
+21,31735,is there a pool table?,yes/no,yes,Yes.,1.0
+22,61532,what color is the table?,other,blue,Gray,0.0
+23,72617,what is in the background?,other,building,Shops,0.0
+24,1386,are the people standing in a line?,yes/no,yes,No.,0.0
+25,68247,what is behind the men?,other,fence,Cage,0.0
+26,26965,is there a bridge in the photo?,yes/no,yes,Yes.,1.0
+27,85910,what is the color of the sky?,other,blue,Blue,1.0
+28,78721,what is on the table?,other,suitcase,Suitcase,1.0
+29,84446,what is the color of the man's shirt on the left?,other,blue,Plaid,0.0
+30,66434,what color suit is the character wearing?,other,blue,Blue,1.0
+31,52356,what color is the man's hair?,other,blue,Blue,1.0
+32,29887,is there a light hanging?,yes/no,yes,Yes.,1.0
+33,55433,what color is the man's shirt?,other,white,White,1.0
+34,71583,what is in the background?,other,table,Board,0.0
+35,37083,what are the men doing?,other,standing,Performing,0.0
+36,96818,what is the person sitting on?,other,chair,Chair,1.0
+37,Average,Total Questions: 36,All,,,0.6597222222222222
