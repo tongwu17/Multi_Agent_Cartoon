@@ -56,7 +56,7 @@ On Windows:
 
 ### 2. Install required packages:
 ```bash
-pip install openai anthropic python-dotenv pandas tqdm
+pip install openai anthropic python-dotenv pandas tqdm word2number
 ```
 
 Environment Configuration

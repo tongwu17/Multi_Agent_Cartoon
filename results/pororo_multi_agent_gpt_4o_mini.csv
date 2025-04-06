@@ -1,22 +1,42 @@
 row_num,video_name,gif_num,qid,question,correct_answer,predicted_answer,accuracy
-1,Pororo_ENGLISH1_1_ep12,36,1222,what does poby ask when he sees eddy,poby asks eddy why is he so jumpy,"Poby asks Eddy, ""Why are you so jumpy?"" when he sees him.",1.0
-2,Pororo_ENGLISH1_1_ep12,49,1232,what does pororo say to crong after he realizes it was eddy and not crong,pororo apologizes to crong and says he made a mistake,Pororo apologizes to Crong and says he made a mistake.,1.0
-3,Pororo_ENGLISH1_1_ep13,12,1258,did eddy stay longer after agreeing to sing,"no, he left right away","Eddy left right away after agreeing to sing, as he mentioned he had to do something at home.",0.0
-4,Pororo_ENGLISH1_1_ep13,41,1283,did eddy's entrance impress the audience,"yes, they were all surprised and clapped","Yes, Eddy's entrance impressed the audience.",1.0
-5,Pororo_ENGLISH1_1_ep2,16,711,did crong score after he shot the ball at the hoop?,no he did not score,"No, Crong did not score after he shot the ball at the hoop.",1.0
-6,Pororo_ENGLISH1_1_ep2,26,730,after the camera is broken what does eddy tell poby they are going to do,eddy says we are going to leave now,Eddy tells Poby that they are going to leave now.,1.0
-7,Pororo_ENGLISH1_1_ep2,30,739,did pororo return the camera before he left?,yes he did return it,"Yes, Pororo did return the camera before he left.",1.0
-8,Pororo_ENGLISH1_1_ep5,41,912,how did pororo feel after seeing that the flower has wilted,he was very upset,Pororo felt very upset after seeing that the flower had wilted.,1.0
-9,Pororo_ENGLISH1_1_ep6,23,946,why is crong scared of pororo?,"crong is scared because it is dark, he doesn't have a lantern and his mind is playing tricks on him","Crong is scared because it is dark, he doesn't have a lantern, and his mind is playing tricks on him, mistaking Pororo for a ghost.",0.75
-10,Pororo_ENGLISH1_1_ep6,4,928,what seasoning does loopy add to her mixing bowl,loopy adds some salt,Loopy adds a little salt to her mixing bowl.,1.0
-11,Pororo_ENGLISH1_1_ep6,43,965,what does eddy think happened to the ghost,"eddy thinks the ghosts must have ran away after they saw eddy, loopy and poby","Eddy thinks the ghost must have run away after seeing him, Poby, and Loopy.",1.0
-12,Pororo_ENGLISH1_1_ep9,16,1052,what do loopy's friends do when they're inside?,they share a snack at the table,they share a snack at the table,1.0
-13,Pororo_ENGLISH1_2_ep2,17,1435,"how say to loopy ""i could not sleep""",poby said to loopy that he could not sleep,"Poby said to Loopy, ""I could not sleep.""",1.0
-14,Pororo_ENGLISH1_2_ep8,48,1767,"what did poby, eddy and loopy tell pororo and crong?","poby, eddy and loopy told pororo and crong that they were there to save them.","Poby, Eddy, and Loopy told Pororo and Crong that they were there to save them.",1.0
-15,Pororo_ENGLISH1_3_ep1,15,2080,what did pororo ask eddy?,pororo asked if eddy is hiding some kind of treasure.,Pororo asked Eddy why he was hiding the map as if it were some kind of treasure.,0.5
-16,Pororo_ENGLISH1_3_ep11,1,2513,what did pororo see moving?,pororo saw the magnet moving.,Pororo saw the magnet moving.,1.0
-17,Pororo_ENGLISH1_3_ep2,49,2173,what was crong playing with as pororo entered the house,crong was playing with a snowboard,Crong was playing with a snowboard as Pororo entered the house.,1.0
-18,Pororo_ENGLISH1_3_ep5,1,2296,what were the friends talking about?,the friends were talking about something secretly.,"Eddy, Loopy, and Poby were secretly discussing a surprise for Pororo's birthday.",1.0
-19,Pororo_ENGLISH1_3_ep5,25,2334,what did pororo's friends said?,friends said : bye pororo.,"Pororo's friends said, ""Bye Pororo!"" and later sang ""Happy birthday, Pororo!""",0.5
-20,Pororo_ENGLISH1_3_ep7,25,2425,"what does crong do when pororo says ""come here""",crong runs away from pororo,"When Pororo says ""come here,"" Crong runs away from Pororo.",1.0
-21,Total Videos: 13,Average,,Total Questions: 20,,,0.8875
+1,Pororo_ENGLISH1_1_ep1,14,383,whtat does eddy ask pororo,he asks pororo what are you doing,eddy asks pororo what he is doing,0.75
+2,Pororo_ENGLISH1_1_ep10,12,1100,were eddy's friends interested seeing his new toy?,"yes, they ran happily towards the new toy.","yes, eddy's friends were interested in seeing his new toy",1.0
+3,Pororo_ENGLISH1_1_ep10,4,1090,what did eddy say after getting the book?,"eddy told, "" what should i make today""","eddy asked, ""what should i make today"" after getting the book",0.75
+4,Pororo_ENGLISH1_1_ep11,51,1181,why did pororo look to ground?,because he was sorry.,pororo looked to the ground because he was feeling sorry for loopy after the situation involving the snowman,0.75
+5,Pororo_ENGLISH1_1_ep12,29,1215,what exploded in pororo's face,a bomb box exploded pororo's face,a bomb box that crong hid exploded in pororo's face,0.75
+6,Pororo_ENGLISH1_1_ep12,36,1222,what does poby ask when he sees eddy,poby asks eddy why is he so jumpy,"poby asks eddy, ""why are you so jumpy",1.0
+7,Pororo_ENGLISH1_1_ep12,43,1226,what does confess in loopy's house,eddy confesses he placed the box in pororo's house,"eddy confesses he placed the box in pororo's house to have fun, which led to the explosion that dirtied pororo's face",0.75
+8,Pororo_ENGLISH1_1_ep12,49,1232,what does pororo say to crong after he realizes it was eddy and not crong,pororo apologizes to crong and says he made a mistake,"pororo apologizes to crong and admits he made a mistake, realizing it was eddy who caused the trouble",1.0
+9,Pororo_ENGLISH1_1_ep13,12,1258,did eddy stay longer after agreeing to sing,"no, he left right away","eddy left right away after agreeing to sing, as he mentioned he had to do something at home",0.75
+10,Pororo_ENGLISH1_1_ep13,41,1283,did eddy's entrance impress the audience,"yes, they were all surprised and clapped",eddy's entrance did impress the audience as they were surprised and clapped for him,1.0
+11,Pororo_ENGLISH1_1_ep2,16,711,did crong score after he shot the ball at the hoop?,no he did not score,crong did not score after he shot the ball at the hoop,1.0
+12,Pororo_ENGLISH1_1_ep2,19,716,does pororo apologize for knocking poby's things down,yes he says he is sorry and offers to clean it up,"yes, pororo apologizes for knocking poby's things down",1.0
+13,Pororo_ENGLISH1_1_ep2,26,730,after the camera is broken what does eddy tell poby they are going to do,eddy says we are going to leave now,eddy tells poby that they are going to leave now,1.0
+14,Pororo_ENGLISH1_1_ep2,30,738,what does pororo almost forget to leave with poby,the broken camera piece,pororo almost forgets to leave with poby the broken camera piece,1.0
+15,Pororo_ENGLISH1_1_ep5,41,912,how did pororo feel after seeing that the flower has wilted,he was very upset,pororo felt very upset after seeing that the flower had wilted,1.0
+16,Pororo_ENGLISH1_1_ep6,2,925,when and who will go to picnic,loopy is going to picnic tomorrow for fun,loopy will go to the picnic tomorrow for fun after finishing cooking tonight,0.75
+17,Pororo_ENGLISH1_1_ep6,23,946,why is crong scared of pororo?,"crong is scared because it is dark, he doesn't have a lantern and his mind is playing tricks on him","crong is scared of pororo because it is dark, he doesn't have a lantern, and he mistakenly thought pororo was a ghost",0.75
+18,Pororo_ENGLISH1_1_ep6,4,928,what seasoning does loopy add to her mixing bowl,loopy adds some salt,loopy adds a little salt to her mixing bowl,0.75
+19,Pororo_ENGLISH1_1_ep6,43,965,what does eddy think happened to the ghost,"eddy thinks the ghosts must have ran away after they saw eddy, loopy and poby","eddy thinks the ghost must have run away after it saw eddy, loopy, and poby",0.75
+20,Pororo_ENGLISH1_1_ep9,16,1052,what do loopy's friends do when they're inside?,they share a snack at the table,"loopy's friends, pororo, crong, poby, and eddy, share a snack at the table and later dance together, having a good time",0.75
+21,Pororo_ENGLISH1_2_ep10,14,1857,what did pororo ask to loopy,"pororo asked ""what was it that you did a minute ago""","pororo asked loopy, ""what was it that you did a minute ago",1.0
+22,Pororo_ENGLISH1_2_ep2,17,1435,"how say to loopy ""i could not sleep""",poby said to loopy that he could not sleep,"poby said to loopy, ""i could not sleep",0.75
+23,Pororo_ENGLISH1_2_ep2,23,1441,what did poby's friend decide,poby's friend decided to help poby to get some sleep,poby's friend decided to help him get some sleep,1.0
+24,Pororo_ENGLISH1_2_ep5,19,1572,who interrupts eddy as he was saying hello to loopy,pororo interrupts eddy as he was saying hello to loopy,pororo interrupts eddy as he was saying hello to loopy,1.0
+25,Pororo_ENGLISH1_2_ep5,26,1579,what did loopy propose to the group after telling them about the flower,loopy proposed that they should ask her anything,loopy proposed that the group ask her anything because the magic flower gives her answers to all questions,0.75
+26,Pororo_ENGLISH1_2_ep8,43,1762,what did pororo think next?,pororo thought next: wjat should i do?,pororo thought next: what should i do,1.0
+27,Pororo_ENGLISH1_2_ep8,48,1767,"what did poby, eddy and loopy tell pororo and crong?","poby, eddy and loopy told pororo and crong that they were there to save them.","poby, eddy, and loopy told pororo and crong that they were there to save them",1.0
+28,Pororo_ENGLISH1_2_ep8,49,1768,what did loopy tell pororo and crong?,loopy told pororo and crong that they couldn't play a trick on her.,loopy told pororo and crong that they couldn't play a trick on her,1.0
+29,Pororo_ENGLISH1_3_ep1,15,2079,what does pororo think eddy is hiding?,pororo thinks eddy is hiding some kind of treasure.,"pororo thinks eddy is hiding a treasure map, which he believes is related to some kind of treasure",0.75
+30,Pororo_ENGLISH1_3_ep11,1,2513,what did pororo see moving?,pororo saw the magnet moving.,pororo saw a magnet moving,0.75
+31,Pororo_ENGLISH1_3_ep12,16,2575,who does loopy give a sandwich to?,loopy gives a sandwich to eddy,loopy gives a sandwich to eddy,1.0
+32,Pororo_ENGLISH1_3_ep12,24,2582,what does loopy ask eddy?,"loopy asks eddy ""what happened?""","loopy asks eddy ""what happened",0.75
+33,Pororo_ENGLISH1_3_ep13,18,2623,how did everybody feel when seeing crong clean out the house,everybody felt surprised to see crong cleaning the house,"everybody felt surprised to see crong cleaning the house, as it was a change from his usual behavior",1.0
+34,Pororo_ENGLISH1_3_ep2,49,2173,what was crong playing with as pororo entered the house,crong was playing with a snowboard,crong was playing with a snowboard as pororo entered the house,1.0
+35,Pororo_ENGLISH1_3_ep3,31,2206,what did pororo answer to loopy and crong,"pororo said ""uh well""","pororo answered loopy and crong by saying, ""uh well"" before explaining that it was just a toy",0.75
+36,Pororo_ENGLISH1_3_ep4,45,2291,whom did eddy say sorry to,eddy said sorry to pororo,eddy said sorry to pororo for doubting him,0.75
+37,Pororo_ENGLISH1_3_ep5,1,2298,what was the friends are doing when pororo came with crong?,the friends were talking about something secretly.,"eddy, loopy, and poby were secretly talking about something when pororo and crong arrived",1.0
+38,Pororo_ENGLISH1_3_ep5,25,2333,does the friends find pororo behind the snow man?,the friends find pororo behind the snow man.,the friends find pororo behind the snowman,0.75
+39,Pororo_ENGLISH1_3_ep7,25,2425,"what does crong do when pororo says ""come here""",crong runs away from pororo,"when pororo says ""come here,"" crong runs away from pororo",1.0
+40,Pororo_ENGLISH1_3_ep7,47,2446,what does poby say when invited to play,"he says ""of course""","poby excitedly responds, ""of course",1.0
+41,Total Videos: 22,Average,,Total Questions: 40,,,0.88125
