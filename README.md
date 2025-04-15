@@ -26,7 +26,7 @@ Multi_Agent_Cartoon/
 ## Requirements
 
 ### System Requirements
-- Python 3.11 or higher
+- Python 3.9 or higher
 - Git
 - Jupyter Notebook/Lab
 
