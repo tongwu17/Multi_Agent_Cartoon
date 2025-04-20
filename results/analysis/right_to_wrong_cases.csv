@@ -1,0 +1,5 @@
+row_num,question_id,question,answer_type,correct_answer,initial_predicted_answer,predicted_answer,evaluator_scores,accuracy,answer_modified,initial_correct,final_correct,improved,worsened,neutral,config,case_type,visual_desc
+5,36705,what are the buildings made of?,other,brick,brick,various,"0.25, 0.25, 0.25",0.25,True,True,False,False,True,False,simpsons_language_hallucination,right_to_wrong,
+24,1386,are the people standing in a line?,yes/no,yes,yes,no,"0.0, 0.0, 0.0",0.0,True,True,False,False,True,False,simpsons_language_hallucination,right_to_wrong,
+30,66434,what color suit is the character wearing?,other,blue,blue,dark,"0.5, 0.5, 0.5",0.5,True,True,False,False,True,False,simpsons_language_hallucination,right_to_wrong,
+15,71663,what is in the background?,other,sky,sky,background,"0.25, 0.25, 0.25",0.25,True,True,False,False,True,False,simpsons_all_agents,right_to_wrong,"The background features a clear blue sky with a few white clouds. There is a building visible behind the characters, which appears to be a simple structure with windows. The scene is set outdoors, likely in a parking area, as indicated by the red car in the foreground."

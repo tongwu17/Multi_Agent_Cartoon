@@ -1,38 +1,38 @@
-row_num,question_id,question,answer_type,correct_answer,visual_desc,initial_predicted_answer,predicted_answer,evaluator_scores,accuracy
-1,77311,what is on the shelf?,other,book,This is a cartoon image from The Simpsons.,books,shelf,"0.25, 0.25, 0.25",0.25
-2,12809,how many people are in the picture?,number,1,This is a cartoon image from The Simpsons.,1,1,"1.0, 1.0, 1.0",1.0
-3,1214,are the people sitting or standing?,other,standing,This is a cartoon image from The Simpsons.,standing,standing,"1.0, 1.0, 1.0",1.0
-4,88112,what is the group of people doing?,other,standing,This is a cartoon image from The Simpsons.,traveling,traveling,"0.25, 0.25, 0.25",0.25
-5,36705,what are the buildings made of?,other,brick,This is a cartoon image from The Simpsons.,brick,brick,"1.0, 1.0, 1.0",1.0
-6,33098,is there a toy in the picture?,yes/no,yes,This is a cartoon image from The Simpsons.,yes,yes,"1.0, 1.0, 1.0",1.0
-7,30161,is there a man on a chair?,yes/no,yes,This is a cartoon image from The Simpsons.,no,yes,"1.0, 1.0, 1.0",1.0
-8,15712,how many people are there?,number,2,This is a cartoon image from The Simpsons.,2,2,"1.0, 1.0, 1.0",1.0
-9,87724,what is the girl doing?,other,standing,This is a cartoon image from The Simpsons.,watching,watching,"0.25, 0.5, 0.25",0.25
-10,12264,how many people are in the image?,number,1,This is a cartoon image from The Simpsons.,1,1,"1.0, 1.0, 1.0",1.0
-11,81928,what is the character doing?,other,standing,This is a cartoon image from The Simpsons.,hiding,hiding,"0.25, 0.25, 0.25",0.25
-12,88069,what is the group of people doing?,other,sitting,This is a cartoon image from The Simpsons.,watching,watching,"0.5, 0.5, 0.5",0.5
-13,66444,what color suit is the man on the left wearing?,other,blue,This is a cartoon image from The Simpsons.,blue,blue,"1.0, 1.0, 1.0",1.0
-14,11251,how many people are at the table?,number,2,This is a cartoon image from The Simpsons.,2,2,"1.0, 1.0, 1.0",1.0
-15,71663,what is in the background?,other,sky,This is a cartoon image from The Simpsons.,sky,sky,"1.0, 1.0, 1.0",1.0
-16,52604,what color is the man's hat?,other,blue,This is a cartoon image from The Simpsons.,blue,blue,"1.0, 1.0, 1.0",1.0
-17,1641,are the people standing or sitting?,other,standing,This is a cartoon image from The Simpsons.,standing,standing,"1.0, 1.0, 1.0",1.0
-18,1572,are the people standing or sitting?,other,standing,This is a cartoon image from The Simpsons.,standing,standing,"1.0, 1.0, 1.0",1.0
-19,11822,how many people are in the image?,number,2,This is a cartoon image from The Simpsons.,2,2,"1.0, 1.0, 1.0",1.0
-20,29597,is there a human in the picture?,yes/no,yes,This is a cartoon image from The Simpsons.,yes,yes,"1.0, 1.0, 1.0",1.0
-21,31735,is there a pool table?,yes/no,yes,This is a cartoon image from The Simpsons.,yes,yes,"1.0, 1.0, 1.0",1.0
-22,61532,what color is the table?,other,blue,This is a cartoon image from The Simpsons.,gray,gray,"0.25, 0.25, 0.25",0.25
-23,72617,what is in the background?,other,building,This is a cartoon image from The Simpsons.,buildings,buildings,"0.75, 0.75, 0.75",0.75
-24,1386,are the people standing in a line?,yes/no,yes,This is a cartoon image from The Simpsons.,yes,no,"0.0, 0.0, 0.0",0.0
-25,68247,what is behind the men?,other,fence,This is a cartoon image from The Simpsons.,cage,cage,"0.25, 0.25, 0.25",0.25
-26,26965,is there a bridge in the photo?,yes/no,yes,This is a cartoon image from The Simpsons.,yes,yes,"1.0, 1.0, 1.0",1.0
-27,85910,what is the color of the sky?,other,blue,This is a cartoon image from The Simpsons.,blue,blue,"1.0, 1.0, 1.0",1.0
-28,78721,what is on the table?,other,suitcase,This is a cartoon image from The Simpsons.,suitcase,suitcase,"1.0, 1.0, 1.0",1.0
-29,84446,what is the color of the man's shirt on the left?,other,blue,This is a cartoon image from The Simpsons.,gray,blue,"1.0, 1.0, 1.0",1.0
-30,66434,what color suit is the character wearing?,other,blue,This is a cartoon image from The Simpsons.,blue,dark,"0.5, 0.5, 0.5",0.5
-31,52356,what color is the man's hair?,other,blue,This is a cartoon image from The Simpsons.,unknown,blue,"1.0, 1.0, 1.0",1.0
-32,29887,is there a light hanging?,yes/no,yes,This is a cartoon image from The Simpsons.,yes,yes,"1.0, 1.0, 1.0",1.0
-33,55433,what color is the man's shirt?,other,white,This is a cartoon image from The Simpsons.,white,white,"1.0, 1.0, 1.0",1.0
-34,71583,what is in the background?,other,table,This is a cartoon image from The Simpsons.,monopoly,boardgame,"0.25, 0.25, 0.25",0.25
-35,37083,what are the men doing?,other,standing,This is a cartoon image from The Simpsons.,talking,conversing,"0.5, 0.5, 0.5",0.5
-36,96818,what is the person sitting on?,other,chair,This is a cartoon image from The Simpsons.,chair,chair,"1.0, 1.0, 1.0",1.0
-37,Average,Total Questions: 36,All,,,,,,0.7777777777777778
+row_num,question_id,question,answer_type,correct_answer,initial_predicted_answer,predicted_answer,evaluator_scores,accuracy
+1,77311,what is on the shelf?,other,book,books,shelf,"0.25, 0.25, 0.25",0.25
+2,12809,how many people are in the picture?,number,1,1,1,"1.0, 1.0, 1.0",1.0
+3,1214,are the people sitting or standing?,other,standing,standing,standing,"1.0, 1.0, 1.0",1.0
+4,88112,what is the group of people doing?,other,standing,traveling,waiting,"0.75, 0.75, 0.75",0.75
+5,36705,what are the buildings made of?,other,brick,brick,various,"0.25, 0.25, 0.25",0.25
+6,33098,is there a toy in the picture?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+7,30161,is there a man on a chair?,yes/no,yes,no,yes,"1.0, 1.0, 1.0",1.0
+8,15712,how many people are there?,number,2,2,2,"1.0, 1.0, 1.0",1.0
+9,87724,what is the girl doing?,other,standing,watching,observing,"0.5, 0.5, 0.5",0.5
+10,12264,how many people are in the image?,number,1,1,1,"1.0, 1.0, 1.0",1.0
+11,81928,what is the character doing?,other,standing,hiding,hiding,"0.25, 0.25, 0.25",0.25
+12,88069,what is the group of people doing?,other,sitting,watching,watching,"0.5, 0.5, 0.5",0.5
+13,66444,what color suit is the man on the left wearing?,other,blue,blue,blue,"1.0, 1.0, 1.0",1.0
+14,11251,how many people are at the table?,number,2,2,2,"1.0, 1.0, 1.0",1.0
+15,71663,what is in the background?,other,sky,sky,sky,"1.0, 1.0, 1.0",1.0
+16,52604,what color is the man's hat?,other,blue,blue,blue,"1.0, 1.0, 1.0",1.0
+17,1641,are the people standing or sitting?,other,standing,standing,standing,"1.0, 1.0, 1.0",1.0
+18,1572,are the people standing or sitting?,other,standing,standing,standing,"1.0, 1.0, 1.0",1.0
+19,11822,how many people are in the image?,number,2,2,2,"1.0, 1.0, 1.0",1.0
+20,29597,is there a human in the picture?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+21,31735,is there a pool table?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+22,61532,what color is the table?,other,blue,green,unspecified,"0.0, 0.0, 0.0",0.0
+23,72617,what is in the background?,other,building,buildings,storefronts,"0.75, 0.75, 0.75",0.75
+24,1386,are the people standing in a line?,yes/no,yes,yes,no,"0.0, 0.0, 0.0",0.0
+25,68247,what is behind the men?,other,fence,cage,cage,"0.25, 0.25, 0.25",0.25
+26,26965,is there a bridge in the photo?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+27,85910,what is the color of the sky?,other,blue,blue,blue,"1.0, 1.0, 1.0",1.0
+28,78721,what is on the table?,other,suitcase,suitcase,suitcase,"1.0, 1.0, 1.0",1.0
+29,84446,what is the color of the man's shirt on the left?,other,blue,gray,teal,"0.75, 0.75, 0.75",0.75
+30,66434,what color suit is the character wearing?,other,blue,blue,dark,"0.5, 0.5, 0.5",0.5
+31,52356,what color is the man's hair?,other,blue,unknown,blue,"1.0, 1.0, 1.0",1.0
+32,29887,is there a light hanging?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+33,55433,what color is the man's shirt?,other,white,white,white,"1.0, 1.0, 1.0",1.0
+34,71583,what is in the background?,other,table,monopoly,monopoly,"0.0, 0.0, 0.0",0.0
+35,37083,what are the men doing?,other,standing,talking,talking,"0.25, 0.25, 0.25",0.25
+36,96818,what is the person sitting on?,other,chair,chair,chair,"1.0, 1.0, 1.0",1.0
+37,Average,Total Questions: 36,All,,,,,0.75
