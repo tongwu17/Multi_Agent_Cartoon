@@ -1,5 +1,5 @@
 Configuration,Accuracy
-Language Only,0.7430555555555556
-Visual + Language,0.7291666666666666
-Language + Hallucination,0.75
-Visual + Language + Hallucination,0.7569444444444444
+Language Only,0.7777777777777778
+Visual + Language,0.7708333333333334
+Language + critic,0.8125
+Visual + Language + critic,0.7569444444444444

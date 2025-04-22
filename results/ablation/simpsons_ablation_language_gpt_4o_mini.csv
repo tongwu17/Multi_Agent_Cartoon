@@ -7,7 +7,7 @@ row_num,question_id,question,answer_type,correct_answer,predicted_answer,evaluat
 6,33098,is there a toy in the picture?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 7,30161,is there a man on a chair?,yes/no,yes,no,"0.0, 0.0, 0.0",0.0
 8,15712,how many people are there?,number,2,2,"1.0, 1.0, 1.0",1.0
-9,87724,what is the girl doing?,other,standing,watching,"0.25, 0.5, 0.25",0.25
+9,87724,what is the girl doing?,other,standing,gawking,"0.25, 0.25, 0.25",0.25
 10,12264,how many people are in the image?,number,1,1,"1.0, 1.0, 1.0",1.0
 11,81928,what is the character doing?,other,standing,hiding,"0.25, 0.25, 0.25",0.25
 12,88069,what is the group of people doing?,other,sitting,watching,"0.5, 0.5, 0.5",0.5
@@ -27,12 +27,12 @@ row_num,question_id,question,answer_type,correct_answer,predicted_answer,evaluat
 26,26965,is there a bridge in the photo?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 27,85910,what is the color of the sky?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 28,78721,what is on the table?,other,suitcase,suitcase,"1.0, 1.0, 1.0",1.0
-29,84446,what is the color of the man's shirt on the left?,other,blue,gray,"0.25, 0.25, 0.25",0.25
+29,84446,what is the color of the man's shirt on the left?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 30,66434,what color suit is the character wearing?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 31,52356,what color is the man's hair?,other,blue,unknown,"0.0, 0.0, 0.0",0.0
 32,29887,is there a light hanging?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 33,55433,what color is the man's shirt?,other,white,white,"1.0, 1.0, 1.0",1.0
-34,71583,what is in the background?,other,table,monopoly,"0.0, 0.0, 0.0",0.0
-35,37083,what are the men doing?,other,standing,talking,"0.25, 0.25, 0.25",0.25
+34,71583,what is in the background?,other,table,board,"0.25, 0.25, 0.25",0.25
+35,37083,what are the men doing?,other,standing,discussing,"0.5, 0.5, 0.5",0.5
 36,96818,what is the person sitting on?,other,chair,chair,"1.0, 1.0, 1.0",1.0
-37,Average,Total Questions: 36,All,,,,0.7430555555555556
+37,Average,Total Questions: 36,All,,,,0.7777777777777778
