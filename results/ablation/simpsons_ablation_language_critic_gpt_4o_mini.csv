@@ -1,5 +1,5 @@
 row_num,question_id,question,answer_type,correct_answer,initial_answer,predicted_answer,evaluator_scores,accuracy
-1,77311,what is on the shelf?,other,book,books,books,"0.75, 0.75, 0.75",0.75
+1,77311,what is on the shelf?,other,book,book,book,"1.0, 1.0, 1.0",1.0
 2,12809,how many people are in the picture?,number,1,1,1,"1.0, 1.0, 1.0",1.0
 3,1214,are the people sitting or standing?,other,standing,standing,standing,"1.0, 1.0, 1.0",1.0
 4,88112,what is the group of people doing?,other,standing,traveling,traveling,"0.25, 0.25, 0.25",0.25
@@ -9,7 +9,7 @@ row_num,question_id,question,answer_type,correct_answer,initial_answer,predicted
 8,15712,how many people are there?,number,2,2,2,"1.0, 1.0, 1.0",1.0
 9,87724,what is the girl doing?,other,standing,gawking,gawking,"0.25, 0.25, 0.25",0.25
 10,12264,how many people are in the image?,number,1,1,1,"1.0, 1.0, 1.0",1.0
-11,81928,what is the character doing?,other,standing,hiding,hiding,"0.25, 0.25, 0.25",0.25
+11,81928,what is the character doing?,other,standing,hiding,hiding,"0.0, 0.0, 0.0",0.0
 12,88069,what is the group of people doing?,other,sitting,watching,watching,"0.5, 0.5, 0.5",0.5
 13,66444,what color suit is the man on the left wearing?,other,blue,blue,blue,"1.0, 1.0, 1.0",1.0
 14,11251,how many people are at the table?,number,2,2,2,"1.0, 1.0, 1.0",1.0
@@ -33,6 +33,6 @@ row_num,question_id,question,answer_type,correct_answer,initial_answer,predicted
 32,29887,is there a light hanging?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
 33,55433,what color is the man's shirt?,other,white,white,white,"1.0, 1.0, 1.0",1.0
 34,71583,what is in the background?,other,table,boardgame,boardgame,"0.25, 0.25, 0.25",0.25
-35,37083,what are the men doing?,other,standing,waiting,waiting,"0.75, 0.75, 0.75",0.75
+35,37083,what are the men doing?,other,standing,discussing,discussing,"0.5, 0.5, 0.5",0.5
 36,96818,what is the person sitting on?,other,chair,chair,chair,"1.0, 1.0, 1.0",1.0
-37,Average,Total Questions: 36,All,,,,,0.8125
+37,Average,Total Questions: 36,All,,,,,0.8055555555555556

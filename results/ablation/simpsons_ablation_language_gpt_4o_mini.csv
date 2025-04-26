@@ -1,15 +1,15 @@
 row_num,question_id,question,answer_type,correct_answer,predicted_answer,evaluator_scores,accuracy
-1,77311,what is on the shelf?,other,book,books,"0.75, 0.75, 0.75",0.75
+1,77311,what is on the shelf?,other,book,book,"1.0, 1.0, 1.0",1.0
 2,12809,how many people are in the picture?,number,1,1,"1.0, 1.0, 1.0",1.0
 3,1214,are the people sitting or standing?,other,standing,standing,"1.0, 1.0, 1.0",1.0
 4,88112,what is the group of people doing?,other,standing,traveling,"0.25, 0.25, 0.25",0.25
 5,36705,what are the buildings made of?,other,brick,brick,"1.0, 1.0, 1.0",1.0
 6,33098,is there a toy in the picture?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
-7,30161,is there a man on a chair?,yes/no,yes,no,"0.0, 0.0, 0.0",0.0
+7,30161,is there a man on a chair?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 8,15712,how many people are there?,number,2,2,"1.0, 1.0, 1.0",1.0
 9,87724,what is the girl doing?,other,standing,gawking,"0.25, 0.25, 0.25",0.25
 10,12264,how many people are in the image?,number,1,1,"1.0, 1.0, 1.0",1.0
-11,81928,what is the character doing?,other,standing,hiding,"0.25, 0.25, 0.25",0.25
+11,81928,what is the character doing?,other,standing,hiding,"0.0, 0.0, 0.0",0.0
 12,88069,what is the group of people doing?,other,sitting,watching,"0.5, 0.5, 0.5",0.5
 13,66444,what color suit is the man on the left wearing?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 14,11251,how many people are at the table?,number,2,2,"1.0, 1.0, 1.0",1.0
@@ -20,19 +20,19 @@ row_num,question_id,question,answer_type,correct_answer,predicted_answer,evaluat
 19,11822,how many people are in the image?,number,2,2,"1.0, 1.0, 1.0",1.0
 20,29597,is there a human in the picture?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 21,31735,is there a pool table?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
-22,61532,what color is the table?,other,blue,gray,"0.25, 0.25, 0.25",0.25
+22,61532,what color is the table?,other,blue,green,"0.25, 0.25, 0.25",0.25
 23,72617,what is in the background?,other,building,buildings,"0.75, 0.75, 0.75",0.75
 24,1386,are the people standing in a line?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 25,68247,what is behind the men?,other,fence,cage,"0.25, 0.25, 0.25",0.25
 26,26965,is there a bridge in the photo?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 27,85910,what is the color of the sky?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 28,78721,what is on the table?,other,suitcase,suitcase,"1.0, 1.0, 1.0",1.0
-29,84446,what is the color of the man's shirt on the left?,other,blue,gray,"0.0, 0.0, 0.25",0.0
+29,84446,what is the color of the man's shirt on the left?,other,blue,gray,"0.0, 0.0, 0.0",0.0
 30,66434,what color suit is the character wearing?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 31,52356,what color is the man's hair?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 32,29887,is there a light hanging?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 33,55433,what color is the man's shirt?,other,white,white,"1.0, 1.0, 1.0",1.0
 34,71583,what is in the background?,other,table,boardgame,"0.25, 0.25, 0.25",0.25
-35,37083,what are the men doing?,other,standing,waiting,"0.75, 0.75, 0.75",0.75
+35,37083,what are the men doing?,other,standing,discussing,"0.5, 0.5, 0.5",0.5
 36,96818,what is the person sitting on?,other,chair,chair,"1.0, 1.0, 1.0",1.0
-37,Average,Total Questions: 36,All,,,,0.7847222222222222
+37,Average,Total Questions: 36,All,,,,0.8055555555555556
