@@ -1,38 +1,38 @@
-row_num,question_id,question,answer_type,correct_answer,visual_description,predicted_answer,evaluator_scores,accuracy
-1,77311,what is on the shelf?,other,book,"The shelf contains several books in varying colors, a small orange vase, and a plaque that reads ""INTERIM PRINCIPAL OF THE YEAR, SEYMOUR SKINNER.""",books,"0.75, 0.75, 0.75",0.75
-2,12809,how many people are in the picture?,number,1,There is one person in the picture.,1,"1.0, 1.0, 1.0",1.0
-3,1214,are the people sitting or standing?,other,standing,The people in the image are standing.,standing,"1.0, 1.0, 1.0",1.0
-4,88112,what is the group of people doing?,other,standing,"The group of people is waiting in an airport terminal, with Homer holding a phone, Marge in a green dress, and Bart and Lisa carrying backpacks.",waiting,"0.75, 0.75, 0.75",0.75
-5,36705,what are the buildings made of?,other,brick,"The buildings are made of red brick, with a rough texture and visible mortar lines, typical of urban settings in The Simpsons.",brick,"1.0, 1.0, 1.0",1.0
-6,33098,is there a toy in the picture?,yes/no,yes,"Yes, there are several toy blocks scattered on the ground, including pink, green, and tan pieces, indicating a playful setting.",yes,"1.0, 1.0, 1.0",1.0
-7,30161,is there a man on a chair?,yes/no,yes,"Yes, there is a man in a teal suit with a light blue shirt standing next to a woman in a purple dress, while another man in a white shirt is seated at a piano.",yes,"1.0, 1.0, 1.0",1.0
-8,15712,how many people are there?,number,2,"There are two people visible in the scene: Homer, wearing a white shirt and blue pants, and Bart, wearing a red shirt and blue shorts.",2,"1.0, 1.0, 1.0",1.0
-9,87724,what is the girl doing?,other,standing,"The girl is looking intently with wide eyes, wearing a yellow dress and a necklace, while standing closely behind two other characters.",watching,"0.5, 0.5, 0.5",0.5
-10,12264,how many people are in the image?,number,1,"There is one person in the image, specifically Marge Simpson, who is driving a car.",1,"1.0, 1.0, 1.0",1.0
-11,81928,what is the character doing?,other,standing,"Bart is peeking around the corner of a building, partially hidden, with a cautious expression on his face.",peeking,"0.25, 0.25, 0.25",0.25
-12,88069,what is the group of people doing?,other,sitting,"The group of people is sitting in a theater, watching a performance, as indicated by their focused expressions and the darkened background typical of such a setting.",watching,"0.5, 0.5, 0.5",0.5
-13,66444,what color suit is the man on the left wearing?,other,blue,The man on the left is wearing a dark blue suit.,blue,"1.0, 1.0, 1.0",1.0
-14,11251,how many people are at the table?,number,2,There are two people at the table: Homer and Bart.,2,"1.0, 1.0, 1.0",1.0
-15,71663,what is in the background?,other,sky,The background features a bright blue sky with a few white clouds and a green shrubbery.,sky,"1.0, 1.0, 1.0",1.0
-16,52604,what color is the man's hat?,other,blue,The man's hat is dark blue.,blue,"1.0, 1.0, 1.0",1.0
-17,1641,are the people standing or sitting?,other,standing,"In the image, Homer is standing, Marge is standing, and the character with the tray is also standing.",standing,"1.0, 1.0, 1.0",1.0
-18,1572,are the people standing or sitting?,other,standing,"The character in the foreground, Homer, is standing, while the two children in the background are also standing behind a wooden fence.",standing,"1.0, 1.0, 1.0",1.0
-19,11822,how many people are in the image?,number,2,"There are two people in the image, a man with gray hair and a woman with blue hair.",2,"1.0, 1.0, 1.0",1.0
-20,29597,is there a human in the picture?,yes/no,yes,"Yes, there is a human in the picture, specifically a yellow-skinned character with a round head, wearing a white shirt, and holding a red guitar.",yes,"1.0, 1.0, 1.0",1.0
-21,31735,is there a pool table?,yes/no,yes,"Yes, there is a pool table, which is green with a wooden frame and has several colored balls on it.",yes,"1.0, 1.0, 1.0",1.0
-22,61532,what color is the table?,other,blue,The table is a light gray color.,gray,"0.25, 0.25, 0.25",0.25
-23,72617,what is in the background?,other,building,"The background features a street scene with two storefronts labeled ""Neiman Mark-Up"" and ""Spiff,"" both displaying ""FOR LEASE"" signs, along with a few trees and a blue sky.",storefronts,"0.75, 0.75, 0.75",0.75
-24,1386,are the people standing in a line?,yes/no,yes,"Yes, the people are standing in a line, facing the center where a ceremony is taking place, with characters arranged in a semi-circle around the main figures.",yes,"1.0, 1.0, 1.0",1.0
-25,68247,what is behind the men?,other,fence,"Behind the men, there is a wooden cage structure with vertical bars, set against a backdrop of dark, cloudy skies and a rocky landscape.",cage,"0.25, 0.25, 0.25",0.25
-26,26965,is there a bridge in the photo?,yes/no,yes,"Yes, there is a bridge in the photo, prominently displayed in the background with a gray color and a geometric design.",yes,"1.0, 1.0, 1.0",1.0
-27,85910,what is the color of the sky?,other,blue,"The sky is a gradient of light blue, transitioning to a deeper blue near the horizon.",blue,"1.0, 1.0, 1.0",1.0
-28,78721,what is on the table?,other,suitcase,"On the table, there is a black suitcase and a single black chair.",suitcase,"1.0, 1.0, 1.0",1.0
-29,84446,what is the color of the man's shirt on the left?,other,blue,The man's shirt on the left is light blue.,blue,"1.0, 1.0, 1.0",1.0
-30,66434,what color suit is the character wearing?,other,blue,The character is wearing a dark blue suit.,blue,"1.0, 1.0, 1.0",1.0
-31,52356,what color is the man's hair?,other,blue,The man's hair is a bright blue color.,blue,"1.0, 1.0, 1.0",1.0
-32,29887,is there a light hanging?,yes/no,yes,"Yes, there is a light hanging from the ceiling, which is a small, round, silver fixture emitting a soft glow.",yes,"1.0, 1.0, 1.0",1.0
-33,55433,what color is the man's shirt?,other,white,The man's shirt is white.,white,"1.0, 1.0, 1.0",1.0
-34,71583,what is in the background?,other,table,"The background features a colorful game board with various spaces, including a purple flag and images of characters, alongside a stack of cards and a purple bill labeled ""LUCRETIA MOTT.""",board,"0.25, 0.25, 0.25",0.25
-35,37083,what are the men doing?,other,standing,"The men are standing in front of a red curtain, with one gesturing with his hand while the other looks on, both dressed in formal suits—one in a light blue suit with a pink tie and the other in a dark blue suit with a white shirt.",gesturing,"0.5, 0.5, 0.5",0.5
-36,96818,what is the person sitting on?,other,chair,The person is sitting on a wooden chair with a red backrest and armrests.,chair,"1.0, 1.0, 1.0",1.0
-37,Average,Total Questions: 36,All,,,,,0.8541666666666666
+row_num,question_id,question,image_path,answer_type,correct_answer,visual_description,predicted_answer,evaluator_scores,accuracy
+1,77311,what is on the shelf?,S27E11-05901.jpg,other,book,"On the shelf, there are several books in varying colors, an orange vase, and a plaque that reads ""INTERIM PRINCIPAL OF THE YEAR.""",books,"1.0, 1.0, 1.0",1.0
+2,12809,how many people are in the picture?,S24E12-26951.jpg,number,1,There is one person in the picture.,1,"1.0, 1.0, 1.0",1.0
+3,1214,are the people sitting or standing?,S26E11-03301.jpg,other,standing,The people in the image are standing.,standing,"1.0, 1.0, 1.0",1.0
+4,88112,what is the group of people doing?,S27E20-04751.jpg,other,standing,"The group of people is standing in an airport terminal, with Homer holding a phone, Marge wearing a green dress, and Bart and Lisa carrying backpacks, all appearing to wait for their flight.",waiting,"0.75, 0.75, 0.75",0.75
+5,36705,what are the buildings made of?,S27E21-07251.jpg,other,brick,"The buildings are made of red brick, with a rough texture and a slightly cartoonish appearance typical of The Simpsons' style.",brick,"1.0, 1.0, 1.0",1.0
+6,33098,is there a toy in the picture?,S25E20-05851.jpg,yes/no,yes,"Yes, there are several toy bricks scattered around the scene, primarily in shades of pink, blue, and tan.",yes,"1.0, 1.0, 1.0",1.0
+7,30161,is there a man on a chair?,S28E21-16651.jpg,yes/no,yes,"Yes, there is a man in a light blue suit with gray hair standing next to a woman in a purple dress.",no,"0.0, 0.0, 0.0",0.0
+8,15712,how many people are there?,S26E04-20751.jpg,number,2,There are two characters visible in the scene: Homer and Bart.,2,"1.0, 1.0, 1.0",1.0
+9,87724,what is the girl doing?,S26E11-10751.jpg,other,standing,"The girl is looking intently with wide eyes and a slightly open mouth, indicating surprise or curiosity.",gazing,"0.5, 0.5, 0.5",0.5
+10,12264,how many people are in the image?,S30E19-18201.jpg,number,1,"There is one person in the image, specifically a woman with blue hair, sitting in the driver's seat of a car.",1,"1.0, 1.0, 1.0",1.0
+11,81928,what is the character doing?,S25E21-05701.jpg,other,standing,"Bart is peeking around the corner of a building, with a cautious expression on his face.",peeking,"0.25, 0.25, 0.25",0.25
+12,88069,what is the group of people doing?,S26E05-16151.jpg,other,sitting,"The group of people is sitting in a theater, watching a performance, as indicated by their focused expressions and the darkened background typical of such a setting.",watching,"0.5, 0.5, 0.5",0.5
+13,66444,what color suit is the man on the left wearing?,S32E08-00801.jpg,other,blue,The man on the left is wearing a dark blue suit.,blue,"1.0, 1.0, 1.0",1.0
+14,11251,how many people are at the table?,S24E16-21001.jpg,number,2,There are two people at the table: Homer and Bart.,2,"1.0, 1.0, 1.0",1.0
+15,71663,what is in the background?,S26E14-05851.jpg,other,sky,The background features a bright blue sky with a few white clouds and a green shrubbery area.,sky,"1.0, 1.0, 1.0",1.0
+16,52604,what color is the man's hat?,S26E20-07801.jpg,other,blue,The man's hat is dark blue.,blue,"1.0, 1.0, 1.0",1.0
+17,1641,are the people standing or sitting?,S31E07-02451.jpg,other,standing,"The characters are all standing, as indicated by their upright posture and the absence of any visible seating.",standing,"1.0, 1.0, 1.0",1.0
+18,1572,are the people standing or sitting?,S26E18-12451.jpg,other,standing,"The character in the foreground, Homer, is standing, while the two children in the background are also standing behind a wooden fence.",standing,"1.0, 1.0, 1.0",1.0
+19,11822,how many people are in the image?,S26E14-15851.jpg,number,2,"There are two people in the image, a man in a white shirt and a woman with blue hair driving.",2,"1.0, 1.0, 1.0",1.0
+20,29597,is there a human in the picture?,S26E08-04251.jpg,yes/no,yes,"Yes, there is a human in the picture, specifically a yellow-skinned character with a round face, wearing a white shirt, and holding a red guitar.",yes,"1.0, 1.0, 1.0",1.0
+21,31735,is there a pool table?,S29E07-04051.jpg,yes/no,yes,"Yes, there is a pool table, which is green with a wooden frame and has several colored billiard balls on it.",yes,"1.0, 1.0, 1.0",1.0
+22,61532,what color is the table?,S24E17-07551.jpg,other,blue,The table is a light blue color.,blue,"1.0, 1.0, 1.0",1.0
+23,72617,what is in the background?,S24E22-03501.jpg,other,building,"The background features a street scene with buildings, a ""Neiman Mark-Up"" store, a ""FOR LEASE"" sign, and a ""SPIFF"" store, along with a green hillside in the distance.",buildings,"1.0, 1.0, 1.0",1.0
+24,1386,are the people standing in a line?,S32E03-05401.jpg,yes/no,yes,"Yes, the people are standing in a line, facing the central figures of the scene, with a clear arrangement of individuals in formal attire.",yes,"1.0, 1.0, 1.0",1.0
+25,68247,what is behind the men?,S33E13-09001.jpg,other,fence,"Behind the men, there is a wooden cage structure with vertical bars, and the setting features a dark, cloudy sky and rocky terrain.",cage,"0.25, 0.25, 0.25",0.25
+26,26965,is there a bridge in the photo?,S26E13-03351.jpg,yes/no,yes,"Yes, there is a bridge in the photo, prominently displayed in the background with a gray, metallic structure.",yes,"1.0, 1.0, 1.0",1.0
+27,85910,what is the color of the sky?,S26E02-18151.jpg,other,blue,"The sky is a gradient of light blue at the top, transitioning to a slightly darker blue near the horizon.",blue,"1.0, 1.0, 1.0",1.0
+28,78721,what is on the table?,S32E10-00501.jpg,other,suitcase,"On the table, there is a gray suitcase and a single black chair.",suitcase,"1.0, 1.0, 1.0",1.0
+29,84446,what is the color of the man's shirt on the left?,S32E15-07801.jpg,other,blue,The man's shirt on the left is light blue.,blue,"1.0, 1.0, 1.0",1.0
+30,66434,what color suit is the character wearing?,S32E08-07951.jpg,other,blue,The character is wearing a dark blue suit.,blue,"1.0, 1.0, 1.0",1.0
+31,52356,what color is the man's hair?,S24E06-16951.jpg,other,blue,The man's hair is not visible in the image; the focus is on a woman with blue hair.,brown,"0.0, 0.0, 0.0",0.0
+32,29887,is there a light hanging?,S27E01-04301.jpg,yes/no,yes,"Yes, there is a light hanging from the ceiling, which is a silver pendant light.",yes,"1.0, 1.0, 1.0",1.0
+33,55433,what color is the man's shirt?,S29E17-00451.jpg,other,white,The man's shirt is white.,white,"1.0, 1.0, 1.0",1.0
+34,71583,what is in the background?,S33E13-04701.jpg,other,table,"The background features a colorful game board with various spaces, including a purple flag and images of characters, alongside a stack of cards and a purple bill labeled ""LUCRETIA MOTT.""",board,"0.25, 0.25, 0.25",0.25
+35,37083,what are the men doing?,S29E10-27951.jpg,other,standing,"The men are standing in front of a red curtain, with one gesturing with his left hand while the other looks on, both dressed in formal suits—one in a light blue suit with a pink tie and the other in a dark blue suit with a white shirt and red pocket square.",gesturing,"0.5, 0.5, 0.5",0.5
+36,96818,what is the person sitting on?,S26E21-02601.jpg,other,chair,"The person sitting on the chair is on a wooden chair with a red backrest, positioned at a dining table set with green plates and food.",chair,"1.0, 1.0, 1.0",1.0
+37,Average,,,All,,,,,0.8333333333333334
