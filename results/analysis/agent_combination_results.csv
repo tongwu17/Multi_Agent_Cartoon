@@ -1,7 +1,0 @@
-,source,config,total_questions,modified_count,modified_pct,improved_count,improved_pct,worsened_count,worsened_pct,neutral_count,neutral_pct,initial_accuracy,final_accuracy,accuracy_change
-simpsons_language_hallucination,simpsons,language_hallucination,36,11,30.555555555555557,2,18.181818181818183,3,27.27272727272727,6,54.54545454545454,0.6388888888888888,0.6111111111111112,-0.027777777777777776
-simpsons_all_agents,simpsons,all_agents,36,3,8.333333333333332,1,33.33333333333333,1,33.33333333333333,1,33.33333333333333,0.6388888888888888,0.6388888888888888,0.0
-pororo_language,pororo,language,40,0,0.0,0,0,0,0,0,0,0.025,0.025,0.0
-pororo_visual_language,pororo,visual_language,40,0,0.0,0,0,0,0,0,0,0.025,0.025,0.0
-pororo_language_hallucination,pororo,language_hallucination,40,34,85.0,0,0.0,0,0.0,34,100.0,0.025,0.025,0.0
-pororo_all_agents,pororo,all_agents,40,35,87.5,0,0.0,0,0.0,35,100.0,0.025,0.025,0.0

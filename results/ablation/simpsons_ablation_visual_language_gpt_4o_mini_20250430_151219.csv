@@ -1,0 +1,38 @@
+row_num,question_id,question,image_path,answer_type,correct_answer,visual_description,predicted_answer,evaluator_scores,accuracy
+1,77311,what is on the shelf?,S27E11-05901.jpg,other,book,"The shelf contains a few books, an orange decorative object, and a plaque that reads ""INTERIM PRINCIPAL OF THE YEAR, SEYMOUR SKINNER.""",books,"1.0, 1.0, 1.0",1.0
+2,12809,how many people are in the picture?,S24E12-26951.jpg,number,1,"There is one person in the picture, depicted as a character wearing a black hat and a formal outfit, with a concerned expression.",1,"1.0, 1.0, 1.0",1.0
+3,1214,are the people sitting or standing?,S26E11-03301.jpg,other,standing,"All characters in the image are standing, with some holding drinks and a cake.",standing,"1.0, 1.0, 1.0",1.0
+4,88112,what is the group of people doing?,S27E20-04751.jpg,other,standing,"The group of people is standing in an airport terminal, with Homer and Marge looking at each other while Bart and Lisa are positioned in front of them, all appearing to wait for their flight.",waiting,"0.75, 0.75, 0.75",0.75
+5,36705,what are the buildings made of?,S27E21-07251.jpg,other,brick,"The buildings are made of red brick, characterized by a rough texture and a cartoonish, exaggerated style typical of The Simpsons.",brick,"1.0, 1.0, 1.0",1.0
+6,33098,is there a toy in the picture?,S25E20-05851.jpg,yes/no,yes,"Yes, there are toy blocks scattered around Bart in the foreground, indicating a playful environment.",yes,"1.0, 1.0, 1.0",1.0
+7,30161,is there a man on a chair?,S28E21-16651.jpg,yes/no,yes,"Yes, there is a man on a chair, specifically a man in a suit sitting at a piano in the background.",yes,"1.0, 1.0, 1.0",1.0
+8,15712,how many people are there?,S26E04-20751.jpg,number,2,"There are two characters visible: Homer, who is standing with an expressive gesture, and Bart, who is hovering above a couch, both in a living room setting.",2,"1.0, 1.0, 1.0",1.0
+9,87724,what is the girl doing?,S26E11-10751.jpg,other,standing,"The girl is standing in the foreground, looking surprised with wide eyes and a slightly open mouth, while her head is tilted slightly to the side.",surprised,"0.25, 0.25, 0.25",0.25
+10,12264,how many people are in the image?,S30E19-18201.jpg,number,1,"There is one person in the image, specifically Marge Simpson, who is sitting in the driver's seat of a car.",1,"1.0, 1.0, 1.0",1.0
+11,81928,what is the character doing?,S25E21-05701.jpg,other,standing,"Bart is peeking around the corner of a building, looking cautiously towards the street.",peeking,"0.25, 0.25, 0.25",0.25
+12,88069,what is the group of people doing?,S26E05-16151.jpg,other,sitting,"The group of people is sitting in theater seats, intently watching a performance, with expressions of anticipation and engagement.",watching,"0.5, 0.5, 0.5",0.5
+13,66444,what color suit is the man on the left wearing?,S32E08-00801.jpg,other,blue,The man on the left is wearing a dark blue suit.,blue,"1.0, 1.0, 1.0",1.0
+14,11251,how many people are at the table?,S24E16-21001.jpg,number,2,"There are two people at the table: Homer and Bart, both sitting and engaged in conversation.",2,"1.0, 1.0, 1.0",1.0
+15,71663,what is in the background?,S26E14-05851.jpg,other,sky,"The background features a clear blue sky with a few white clouds, and a distant building structure, likely a garage or shop, positioned behind the characters.",sky,"1.0, 1.0, 1.0",1.0
+16,52604,what color is the man's hat?,S26E20-07801.jpg,other,blue,The man's hat is dark blue.,blue,"1.0, 1.0, 1.0",1.0
+17,1641,are the people standing or sitting?,S31E07-02451.jpg,other,standing,All characters are standing.,standing,"1.0, 1.0, 1.0",1.0
+18,1572,are the people standing or sitting?,S26E18-12451.jpg,other,standing,"The character Homer is standing in the yard, while the two children are also standing behind the fence.",standing,"1.0, 1.0, 1.0",1.0
+19,11822,how many people are in the image?,S26E14-15851.jpg,number,2,"There are two people in the image, a man in a white shirt and a woman with blue hair driving the car.",2,"1.0, 1.0, 1.0",1.0
+20,29597,is there a human in the picture?,S26E08-04251.jpg,yes/no,yes,"Yes, there is a human in the picture, specifically a character with a yellow skin tone, wearing a white shirt, and holding a guitar in a room filled with various musical instruments.",yes,"1.0, 1.0, 1.0",1.0
+21,31735,is there a pool table?,S29E07-04051.jpg,yes/no,yes,"Yes, there is a pool table prominently displayed in the center of the scene, with several colored balls arranged on it.",yes,"1.0, 1.0, 1.0",1.0
+22,61532,what color is the table?,S24E17-07551.jpg,other,blue,The table is a light gray color.,gray,"0.25, 0.25, 0.25",0.25
+23,72617,what is in the background?,S24E22-03501.jpg,other,building,"The background features a street scene with several buildings, including a storefront labeled ""Neiman Mark-Up"" and another with a ""FOR LEASE"" sign, along with a cobblestone pathway and greenery in the distance.",buildings,"1.0, 1.0, 1.0",1.0
+24,1386,are the people standing in a line?,S32E03-05401.jpg,yes/no,yes,"Yes, the people are standing in a line, facing towards a central figure who is officiating an event, with several characters arranged closely together in a semi-circle formation.",yes,"1.0, 1.0, 1.0",1.0
+25,68247,what is behind the men?,S33E13-09001.jpg,other,fence,"Behind the men, there is a wooden cage structure with vertical bars, set against a backdrop of a dark, cloudy sky and a rocky landscape.",cage,"0.25, 0.25, 0.25",0.25
+26,26965,is there a bridge in the photo?,S26E13-03351.jpg,yes/no,yes,"Yes, there is a bridge in the background, prominently displayed behind the characters.",yes,"1.0, 1.0, 1.0",1.0
+27,85910,what is the color of the sky?,S26E02-18151.jpg,other,blue,The sky is a bright blue with a gradient that lightens towards the horizon.,blue,"1.0, 1.0, 1.0",1.0
+28,78721,what is on the table?,S32E10-00501.jpg,other,suitcase,"On the table, there is a black suitcase and a single empty chair.",suitcase,"1.0, 1.0, 1.0",1.0
+29,84446,what is the color of the man's shirt on the left?,S32E15-07801.jpg,other,blue,The man's shirt on the left is light blue.,blue,"1.0, 1.0, 1.0",1.0
+30,66434,what color suit is the character wearing?,S32E08-07951.jpg,other,blue,The character is wearing a dark blue suit with a white shirt and a red tie.,blue,"1.0, 1.0, 1.0",1.0
+31,52356,what color is the man's hair?,S24E06-16951.jpg,other,blue,The man's hair is not visible in the image; only a woman with blue hair is present.,black,"0.0, 0.0, 0.0",0.0
+32,29887,is there a light hanging?,S27E01-04301.jpg,yes/no,yes,"Yes, there is a light hanging from the ceiling, casting a soft glow in the scene.",yes,"1.0, 1.0, 1.0",1.0
+33,55433,what color is the man's shirt?,S29E17-00451.jpg,other,white,The man's shirt is white.,white,"1.0, 1.0, 1.0",1.0
+34,71583,what is in the background?,S33E13-04701.jpg,other,table,"The background features a colorful board game with various spaces, including a purple space marked with a flag and images of characters, alongside a hand holding a purple bill labeled ""LUCRETIA MOTT.""",gameboard,"0.25, 0.25, 0.25",0.25
+35,37083,what are the men doing?,S29E10-27951.jpg,other,standing,"The men are standing in front of a red curtain, with one gesturing expressively while the other looks concerned, indicating a moment of discussion or surprise.",discussing,"0.5, 0.5, 0.5",0.5
+36,96818,what is the person sitting on?,S26E21-02601.jpg,other,chair,"The person is sitting on a wooden chair with a distinctive red backrest, positioned at a dining table.",chair,"1.0, 1.0, 1.0",1.0
+37,Average,,,All,"Total Questions: 36, Total Images: 36",,,,0.8263888888888888
