@@ -1,5 +1,5 @@
 row_num,question_id,image_path,question,answer_type,correct_answer,predicted_answer,evaluator_scores,accuracy
-1,77311,S27E11-05901.jpg,what is on the shelf?,other,book,book,"1.0, 1.0, 1.0",1.0
+1,77311,S27E11-05901.jpg,what is on the shelf?,other,book,books,"1.0, 1.0, 1.0",1.0
 2,12809,S24E12-26951.jpg,how many people are in the picture?,number,1,1,"1.0, 1.0, 1.0",1.0
 3,1214,S26E11-03301.jpg,are the people sitting or standing?,other,standing,standing,"1.0, 1.0, 1.0",1.0
 4,88112,S27E20-04751.jpg,what is the group of people doing?,other,standing,traveling,"0.25, 0.25, 0.25",0.25
@@ -20,19 +20,19 @@ row_num,question_id,image_path,question,answer_type,correct_answer,predicted_ans
 19,11822,S26E14-15851.jpg,how many people are in the image?,number,2,2,"1.0, 1.0, 1.0",1.0
 20,29597,S26E08-04251.jpg,is there a human in the picture?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 21,31735,S29E07-04051.jpg,is there a pool table?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
-22,61532,S24E17-07551.jpg,what color is the table?,other,blue,gray,"0.25, 0.25, 0.25",0.25
+22,61532,S24E17-07551.jpg,what color is the table?,other,blue,green,"0.25, 0.25, 0.25",0.25
 23,72617,S24E22-03501.jpg,what is in the background?,other,building,buildings,"1.0, 1.0, 1.0",1.0
 24,1386,S32E03-05401.jpg,are the people standing in a line?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 25,68247,S33E13-09001.jpg,what is behind the men?,other,fence,cage,"0.25, 0.25, 0.25",0.25
 26,26965,S26E13-03351.jpg,is there a bridge in the photo?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 27,85910,S26E02-18151.jpg,what is the color of the sky?,other,blue,blue,"1.0, 1.0, 1.0",1.0
 28,78721,S32E10-00501.jpg,what is on the table?,other,suitcase,suitcase,"1.0, 1.0, 1.0",1.0
-29,84446,S32E15-07801.jpg,what is the color of the man's shirt on the left?,other,blue,gray,"0.25, 0.25, 0.25",0.25
+29,84446,S32E15-07801.jpg,what is the color of the man's shirt on the left?,other,blue,gray,"0.25, 0.0, 0.25",0.25
 30,66434,S32E08-07951.jpg,what color suit is the character wearing?,other,blue,blue,"1.0, 1.0, 1.0",1.0
-31,52356,S24E06-16951.jpg,what color is the man's hair?,other,blue,blue,"1.0, 1.0, 1.0",1.0
+31,52356,S24E06-16951.jpg,what color is the man's hair?,other,blue,yellow,"0.0, 0.0, 0.0",0.0
 32,29887,S27E01-04301.jpg,is there a light hanging?,yes/no,yes,yes,"1.0, 1.0, 1.0",1.0
 33,55433,S29E17-00451.jpg,what color is the man's shirt?,other,white,white,"1.0, 1.0, 1.0",1.0
-34,71583,S33E13-04701.jpg,what is in the background?,other,table,board,"0.25, 0.25, 0.25",0.25
-35,37083,S29E10-27951.jpg,what are the men doing?,other,standing,discussing,"0.5, 0.5, 0.5",0.5
+34,71583,S33E13-04701.jpg,what is in the background?,other,table,boardgame,"0.25, 0.25, 0.25",0.25
+35,37083,S29E10-27951.jpg,what are the men doing?,other,standing,waiting,"0.75, 0.75, 0.75",0.75
 36,96818,S26E21-02601.jpg,what is the person sitting on?,other,chair,chair,"1.0, 1.0, 1.0",1.0
-37,Average,,,All,"Total Questions: 36, Total Images: 36",,,0.0
+37,Average,,,All,"Total Questions: 36, Total Images: 36",,,0.8055555555555556
