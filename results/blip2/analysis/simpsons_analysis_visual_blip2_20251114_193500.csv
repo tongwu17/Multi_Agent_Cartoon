@@ -1,0 +1,38 @@
+row_num,question_id,image_path,question,answer_type,correct_answer,blip2_visual_description
+1,77311,S27E11-05901.jpg,what is on the shelf?,other,book,a bookcase
+2,12809,S24E12-26951.jpg,how many people are in the picture?,number,1,a single person
+3,1214,S26E11-03301.jpg,are the people sitting or standing?,other,standing,seated
+4,88112,S27E20-04751.jpg,what is the group of people doing?,other,standing,walking down a hallway
+5,36705,S27E21-07251.jpg,what are the buildings made of?,other,brick,a man is standing in front of a trash can
+6,33098,S25E20-05851.jpg,is there a toy in the picture?,yes/no,yes,yes
+7,30161,S28E21-16651.jpg,is there a man on a chair?,yes/no,yes,This is a cartoon image from The Simpsons.
+8,15712,S26E04-20751.jpg,how many people are there?,number,2,a couple of people are there
+9,87724,S26E11-10751.jpg,what is the girl doing?,other,standing,she is looking at the camera
+10,12264,S30E19-18201.jpg,how many people are in the image?,number,1,This is a cartoon image from The Simpsons.
+11,81928,S25E21-05701.jpg,what is the character doing?,other,standing,he is standing in the street
+12,88069,S26E05-16151.jpg,what is the group of people doing?,other,sitting,watching a movie
+13,66444,S32E08-00801.jpg,what color suit is the man on the left wearing?,other,blue,a blue suit
+14,11251,S24E16-21001.jpg,how many people are at the table?,number,2,a couple of people are at the table
+15,71663,S26E14-05851.jpg,what is in the background?,other,sky,a police car
+16,52604,S26E20-07801.jpg,what color is the man's hat?,other,blue,black
+17,1641,S31E07-02451.jpg,are the people standing or sitting?,other,standing,seated
+18,1572,S26E18-12451.jpg,are the people standing or sitting?,other,standing,a couple of people standing
+19,11822,S26E14-15851.jpg,how many people are in the image?,number,2,two
+20,29597,S26E08-04251.jpg,is there a human in the picture?,yes/no,yes,yes
+21,31735,S29E07-04051.jpg,is there a pool table?,yes/no,yes,yes
+22,61532,S24E17-07551.jpg,what color is the table?,other,blue,a table is a table
+23,72617,S24E22-03501.jpg,what is in the background?,other,building,a man and woman are walking down a street
+24,1386,S32E03-05401.jpg,are the people standing in a line?,yes/no,yes,yes
+25,68247,S33E13-09001.jpg,what is behind the men?,other,fence,a satanic sat
+26,26965,S26E13-03351.jpg,is there a bridge in the photo?,yes/no,yes,yes
+27,85910,S26E02-18151.jpg,what is the color of the sky?,other,blue,a blue sky
+28,78721,S32E10-00501.jpg,what is on the table?,other,suitcase,a woman is standing in front of a table
+29,84446,S32E15-07801.jpg,what is the color of the man's shirt on the left?,other,blue,a man is standing in front of a curtain
+30,66434,S32E08-07951.jpg,what color suit is the character wearing?,other,blue,a blue suit
+31,52356,S24E06-16951.jpg,what color is the man's hair?,other,blue,a man with a blue hair color
+32,29887,S27E01-04301.jpg,is there a light hanging?,yes/no,yes,i'm not sure
+33,55433,S29E17-00451.jpg,what color is the man's shirt?,other,white,blue
+34,71583,S33E13-04701.jpg,what is in the background?,other,table,a chess game
+35,37083,S29E10-27951.jpg,what are the men doing?,other,standing,they are standing in front of a curtain
+36,96818,S26E21-02601.jpg,what is the person sitting on?,other,chair,a chair
+37,Average,,,All,"Total Questions: 36, Total Images: 36",
