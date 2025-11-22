@@ -1,0 +1,848 @@
+========================== Visual Agent =====================
+def visual_agent(image_base64, question, description, subtitles, max_retries=3, retry_delay=2):
+    """Analyze GIF with progressive fallback: dynamic (3 attempts) -> static (2 attempts)"""
+    # If visual agent is disabled, return placeholder
+    if not ENABLE_VISUAL_AGENT:
+        return "This is a cartoon image from Pororo."
+
+    # Dynamic prompt for narrative GIF analysis
+    dynamic_prompt = f"""You are a cartoon visual analysis agent specialized in Pororo animated GIFs.
+
+IMPORTANT: You are analyzing a GIF animation (sequence of frames), not a single static image.
+Your goal is to OBJECTIVELY describe the VISIBLE ACTIONS and EVENTS to help answer: "{question}"
+
+Context:
+- Subtitles (dialogue): "{subtitles}"
+- Scene description: "{description}"
+
+Task: Generate an OBJECTIVE narrative description of what you SEE:
+
+**Visible Actions in Sequence**:
+   - Describe ONLY what you directly observe happening
+   - Note the order of events: what happens first, second, third
+   - Describe concrete movements, gestures, and positions
+
+**Character Behaviors** (observable only):
+   - What specific actions does each character perform?
+   - What facial expressions or body postures are clearly visible?
+   - How do characters physically interact?
+
+**Dialogue Integration** (when subtitles are provided):
+   - Describe what the character is doing WHILE speaking the dialogue
+   - Match visual actions to the spoken words from subtitles
+
+Output Format (choose based on question type):
+
+**For action questions** ("what did", "how did"):
+"First, [character] [specific visible action]. Then, [character] [next visible action]. Finally, [observable outcome]."
+
+**For dialogue questions** ("what did X say", "what does X say"):
+"[Character] says \"[exact dialogue from subtitles]\" while [visible action/gesture]."
+
+**For "why" questions**:
+Describe the VISIBLE sequence WITHOUT interpreting emotions:
+"First, [Character] [action 1]. Then, [character] [action 2]." (Let the language agent interpret WHY)
+
+CRITICAL RULES - MUST FOLLOW:
+
+DO:
+- Describe only what you can SEE with your eyes
+- Use precise action verbs: "walks", "looks down", "raises hand", "turns around"
+- State facts: "Character leaves the room", "Character's head is lowered"
+- Quote dialogue exactly from subtitles when describing speech
+
+DO NOT:
+- Speculate about feelings or thoughts: NO "possibly", "might", "seems", "appears to feel"
+- Interpret intentions: NO "decides to", "wants to", "plans to"
+- Guess emotions unless VERY obvious: NO "feels sorry", "is confused" (use "lowers head", "furrows brow")
+- Predict future actions: NO "might reconsider", "will probably"
+- Add explanations: NO "because he feels X" (just describe the visible action)
+- Include ANY meta-commentary: NO "I'm unable to analyze", "This structure will help", "I can guide you"
+
+GOOD Examples:
+- "First, Eddy stands outside on the ice with Poby and Loopy. Then, Eddy looks toward Pororo and asks 'Pororo what are you doing.' Finally, Crong passes by Eddy, Poby, and Loopy."
+- "First, Eddy holds a book in both hands and smiles broadly. Then, he raises it slightly while tilting his head to the side. Finally, he says 'what should I make today' while looking at the book."
+- "First, Pororo lowers his head and looks at the ground. Then, he raises his head and looks directly at Crong. Finally, Pororo says 'Crong, I apologize, I made a mistake.'"
+
+BAD Examples:
+- "Pororo possibly feels embarrassed" (speculation - NOT ALLOWED)
+- "Eddy might reconsider staying" (prediction - NOT ALLOWED)
+- "Loopy seems confident" (interpretation - describe her pose instead - NOT ALLOWED)
+- "I'm unable to analyze the GIF directly, but..." (meta-commentary - FORBIDDEN)
+
+Remember: You are a CAMERA, not a mind reader. Describe what the camera sees.
+"""
+
+    # Static prompt for frame-based analysis (fallback)
+    static_prompt = f"""You are a cartoon visual analysis agent specialized in Pororo cartoon style.
+
+Focus STRICTLY on answering the question "{question}". Given an image, subtitles "{subtitles}" (which represent what characters are speaking),
+and a scene description "{description}", analyze the image carefully and provide two structured JSON outputs.
+
+Task 1 - Structured Scene Understanding:
+Return detailed information strictly following this format:
+{{
+  "objects": [{{"name": "object or character name", "attributes": ["simple attributes"], "location": ["foreground/background", "left/right/center"]}}],
+  "actions": [{{"subject": "character/object", "action": "simple action verb", "object": "optional interacted object"}}],
+  "relationships": [{{"subject": "character/object", "relation": "spatial relation", "object": "character/object"}}],
+  "uncertain": [{{"description": "unclear object/detail", "location": ["foreground/background", "left/right/center"]}}]
+}}
+
+Task 2 - Region-based Captions:
+Divide the image into meaningful regions ("left", "center", "right", "foreground", "background"), and generate one concise caption per region:
+{{
+  "left": "caption describing the left region",
+  "center": "caption describing the center region",
+  "right": "caption describing the right region",
+  "foreground": "caption describing the foreground",
+  "background": "caption describing the background"
+}}
+
+Strict Guidelines:
+- Use known Pororo character names if identifiable (e.g., Pororo, Crong, Eddy, Loopy, Poby).
+- Describe ONLY clearly visible content. Never infer unseen details or storyline.
+- If unsure about a detail, explicitly add it to "uncertain".
+- Each regional caption must be concise and factual, noting explicitly if the area is unclear or empty.
+- Use subtitles only for clarifying visual context. Do NOT directly quote subtitles unless clearly visible in image content."""
+
+    # Phase 1: Try dynamic GIF analysis (3 attempts)
+    for attempt in range(max_retries):
+        try:
+            if is_openai_model:
+                # Generate narrative text description (not JSON)
+                completion = client.chat.completions.create(
+                    model=MODEL_NAME,
+                    messages=[{
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": dynamic_prompt},
+                            {"type": "image_url", "image_url": {"url": f"data:image/gif;base64,{image_base64}"}}
+                        ]
+                    }],
+                    max_tokens=500,
+                    temperature=0.0
+                )
+                visual_description = completion.choices[0].message.content.strip()
+
+                # Check if output contains meta-commentary - if so, reject entirely
+                meta_phrases = [
+                    "i'm unable to analyze",
+                    "i cannot analyze",
+                    "i can't analyze",
+                    "i cannot view",
+                    "i don't have access",
+                    "this structure will help",
+                    "this structure should help",
+                    "i can guide you",
+                    "let me help you",
+                    "please provide",
+                    "based on the provided context",
+                    "i can help with a description",
+                    "would you like me to",
+                    "feel free to provide",
+                    "happy to help",
+                    "i'd be happy to",
+                    "context you would like",
+                    "details or context"
+                ]
+
+                # If any meta-commentary phrase appears, reject this attempt entirely
+                if any(phrase in visual_description.lower() for phrase in meta_phrases):
+                    print(f"Dynamic analysis attempt {attempt + 1} contains meta-commentary. Rejecting...")
+                    if attempt < max_retries - 1:
+                        time.sleep(retry_delay)
+                    continue
+
+                # Remove code blocks if any
+                visual_description = re.sub(r'```.*?```', '', visual_description, flags=re.DOTALL)
+
+                # Clean up extra blank lines
+                visual_description = re.sub(r'\n\s*\n\s*\n', '\n\n', visual_description)
+                visual_description = visual_description.strip()
+
+                # If we got meaningful content, use it
+                if visual_description and len(visual_description) > 20:
+                    print(f"Dynamic analysis succeeded on attempt {attempt + 1}")
+                    return visual_description
+
+                print(f"Dynamic analysis attempt {attempt + 1} returned insufficient content. Retrying...")
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+            else:
+                # Anthropic model - generate narrative description
+                completion = client.messages.create(
+                    model=MODEL_NAME,
+                    max_tokens=500,
+                    temperature=0.0,
+                    messages=[{
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": dynamic_prompt},
+                            {"type": "image", "source": {"type": "base64", "media_type": "image/gif", "data": image_base64}}
+                        ]
+                    }]
+                )
+                visual_description = completion.content[0].text.strip()
+
+                # Check if output contains meta-commentary - if so, reject entirely
+                meta_phrases = [
+                    "i'm unable to analyze",
+                    "i cannot analyze",
+                    "i can't analyze",
+                    "i cannot view",
+                    "i don't have access",
+                    "this structure will help",
+                    "this structure should help",
+                    "i can guide you",
+                    "let me help you",
+                    "please provide",
+                    "based on the provided context",
+                    "i can help with a description",
+                    "would you like me to",
+                    "feel free to provide",
+                    "happy to help",
+                    "i'd be happy to",
+                    "context you would like",
+                    "details or context"
+                ]
+
+                # If any meta-commentary phrase appears, reject this attempt entirely
+                if any(phrase in visual_description.lower() for phrase in meta_phrases):
+                    print(f"Dynamic analysis attempt {attempt + 1} contains meta-commentary. Rejecting...")
+                    if attempt < max_retries - 1:
+                        time.sleep(retry_delay)
+                    continue
+
+                # Remove code blocks if any
+                visual_description = re.sub(r'```.*?```', '', visual_description, flags=re.DOTALL)
+
+                # Clean up extra blank lines
+                visual_description = re.sub(r'\n\s*\n\s*\n', '\n\n', visual_description)
+                visual_description = visual_description.strip()
+
+                # If we got meaningful content, use it
+                if visual_description and len(visual_description) > 20:
+                    print(f"Dynamic analysis succeeded on attempt {attempt + 1}")
+                    return visual_description
+
+                print(f"Dynamic analysis attempt {attempt + 1} returned insufficient content. Retrying...")
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+        except Exception as e:
+            print(f"Dynamic analysis attempt {attempt + 1} failed: {e}")
+            traceback.print_exc()
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
+
+
+    # Phase 2: Fallback to static frame analysis (2 attempts)
+    print("Dynamic analysis failed. Falling back to static frame analysis...")
+    for attempt in range(2):  # 2 attempts for static fallback
+        try:
+            if is_openai_model:
+                # 1. Attempt forced JSON mode
+                try:
+                    completion = client.chat.completions.create(
+                        model=MODEL_NAME,
+                        response_format= {"type": "json_object"},
+                        messages=[{
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": static_prompt},
+                                {"type": "image_url",
+                                 "image_url": {"url": f"data:image/gif;base64,{image_base64}"}}
+                            ]
+                        }],
+                        max_tokens=1500,
+                        temperature=0.0
+                    )
+                    visual_json = completion.choices[0].message.content.strip()
+                    visual_description = visual_json_to_text(visual_json)
+                    if visual_description and len(visual_description) > 20:
+                        print(f"Static analysis (JSON mode) succeeded on attempt {attempt + 1}")
+                        return visual_description
+                except Exception as e:
+                    print(f"Static analysis (JSON mode) attempt {attempt + 1} failed: {e}")
+                    # Fallback to regular mode
+                    pass
+
+                # 2. Fallback: Regular mode
+                try:
+                    completion = client.chat.completions.create(
+                        model=MODEL_NAME,
+                        messages=[{
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": static_prompt},
+                                {"type": "image_url",
+                                 "image_url": {"url": f"data:image/gif;base64,{image_base64}"}}
+                            ]
+                        }],
+                        max_tokens=1500,
+                        temperature=0.0
+                    )
+                    visual_json = completion.choices[0].message.content.strip()
+                    # Clean up markdown code blocks
+                    visual_json = re.sub(r'^```json\s*', '', visual_json, flags=re.MULTILINE)
+                    visual_json = re.sub(r'\s*```$', '', visual_json, flags=re.MULTILINE)
+                    visual_json = visual_json.strip()
+                    visual_description = visual_json_to_text(visual_json)
+                    if visual_description and len(visual_description) > 20:
+                        print(f"Static analysis (regular mode) succeeded on attempt {attempt + 1}")
+                        return visual_description
+                except Exception as e:
+                    print(f"Static analysis (regular mode) attempt {attempt + 1} failed: {e}")
+                    traceback.print_exc()
+            else:
+                # Anthropic model - static analysis
+                try:
+                    completion = client.messages.create(
+                        model=MODEL_NAME,
+                        max_tokens=1500,
+                        temperature=0.0,
+                        messages=[{
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": static_prompt},
+                                {"type": "image", "source": {"type": "base64", "media_type": "image/gif", "data": image_base64}}
+                            ]
+                        }]
+                    )
+                    visual_json = completion.content[0].text.strip()
+                    # Clean up markdown code blocks
+                    visual_json = re.sub(r'^```json\s*', '', visual_json, flags=re.MULTILINE)
+                    visual_json = re.sub(r'\s*```$', '', visual_json, flags=re.MULTILINE)
+                    visual_json = visual_json.strip()
+                    visual_description = visual_json_to_text(visual_json)
+                    if visual_description and len(visual_description) > 20:
+                        print(f"Static analysis succeeded on attempt {attempt + 1}")
+                        return visual_description
+                except Exception as e:
+                    print(f"Static analysis attempt {attempt + 1} failed: {e}")
+                    traceback.print_exc()
+
+            if attempt < 1:  # If not the last attempt
+                time.sleep(retry_delay)
+        except Exception as e:
+            print(f"Static analysis attempt {attempt + 1} outer exception: {e}")
+            traceback.print_exc()
+            if attempt < 1:
+                time.sleep(retry_delay)
+
+    # If all attempts failed, return placeholder
+    print("All visual analysis attempts failed. Returning placeholder.")
+    return "This is a cartoon image from Pororo."
+
+
+# Convert JSON to narrative text
+def visual_json_to_text(visual_json):
+    """Convert structured JSON visual output to narrative text"""
+    try:
+        data = json.loads(visual_json)
+
+        # Extract scene understanding
+        objects = data.get("objects", [])
+        actions = data.get("actions", [])
+        relationships = data.get("relationships", [])
+
+        # Extract regional captions
+        regions = {k: v for k, v in data.items() if k in ["left", "center", "right", "foreground", "background"]}
+
+        # Build narrative text
+        text_parts = []
+
+        # Objects
+        if objects:
+            obj_descs = [f"{obj.get('name', 'unknown')} ({', '.join(obj.get('attributes', []))} at {', '.join(obj.get('location', []))})"
+                        for obj in objects]
+            text_parts.append("Objects: " + "; ".join(obj_descs))
+
+        # Actions
+        if actions:
+            action_descs = [f"{act.get('subject', 'unknown')} {act.get('action', 'acts')}" +
+                          (f" with {act['object']}" if act.get('object') else "")
+                          for act in actions]
+            text_parts.append("Actions: " + "; ".join(action_descs))
+
+        # Relationships
+        if relationships:
+            rel_descs = [f"{rel.get('subject', 'unknown')} {rel.get('relation', 'relates to')} {rel.get('object', 'unknown')}"
+                        for rel in relationships]
+            text_parts.append("Relationships: " + "; ".join(rel_descs))
+
+        # Regional captions
+        if regions:
+            region_descs = [f"{region}: {caption}" for region, caption in regions.items()]
+            text_parts.append("Regions: " + "; ".join(region_descs))
+
+        return " | ".join(text_parts) if text_parts else "No visual information extracted."
+
+    except json.JSONDecodeError as e:
+        print(f"JSON parsing failed: {e}")
+        return visual_json  # Fallback: return raw JSON string
+
+========================== Critic Agent =====================
+
+def critic_agent(question, image_base64, pure_language_answer, visual_language_answer, visual_description, description,
+                 subtitles, max_retries=5, retry_delay=10, verbose=False):
+    if not ENABLE_CRITIC_AGENT:
+        return (visual_language_answer if ENABLE_VISUAL_AGENT else pure_language_answer), False, {}
+
+    # For true ablation study:
+    # 1. language_critic: Only uses pure_language_answer (with visual disabled)
+    # 2. visual_language_critic: Uses both pure_language_answer and visual_language_answer
+
+    # Validate correct inputs are available for each configuration
+    if ENABLE_VISUAL_AGENT:
+        # Visual + Language + Critic needs both pure and visual language answers
+        if pure_language_answer is None:
+            pure_language_answer = ""
+
+        if visual_language_answer is None:
+            visual_language_answer = ""
+
+        if visual_description is None or visual_description == "This is a cartoon image from Pororo.":
+            print("Error: visual_language_critic requires cached visual_description")
+            return "", False, {}
+    else:  # language_critic
+        # Language + Critic only needs pure language answer
+        if pure_language_answer is None:
+            pure_language_answer = ""
+
+            # Visual is intentionally disabled in language_critic
+        visual_description = "This is a cartoon image from Pororo."
+        visual_language_answer = ""
+
+    # Determine visual_description quality flag
+    # In language_critic, visual is intentionally disabled
+    if not ENABLE_VISUAL_AGENT:
+        force_poor_visual_description_quality = True
+    else:
+        # In visual_language_critic, use the actual visual description
+        force_poor_visual_description_quality = False
+
+    question_type = classify_question_type(question)
+
+    prompt = f"""
+    Inputs:
+    - QUESTION: {question}
+    - PURE_LANGUAGE_ANSWER: "{pure_language_answer}"
+    - VISUAL_LANGUAGE_ANSWER: "{visual_language_answer}"
+    - VISUAL_DESCRIPTION: "{visual_description}"
+    - SCENE_DESCRIPTION: "{description}"
+    - SUBTITLES: "{subtitles}"
+    - QUESTION_TYPE: "{question_type}"
+
+    You are a cartoon critic expert tasked with evaluating two candidate answers for the QUESTION. Your goal is to determine which answer is more accurate using trusted evidence. Follow the steps below carefully and precisely.
+
+    Step 1: Assess Visual Description
+    Evaluate whether the VISUAL_DESCRIPTION is directly relevant and complete for answering the QUESTION.
+    - If YES, set VISUAL_DESCRIPTION_SUFFICIENCY = SUFFICIENT
+    - If NO, set VISUAL_DESCRIPTION_SUFFICIENCY = INSUFFICIENT
+
+    Step 2: Check Answer Agreement
+    Compare PURE_LANGUAGE_ANSWER and VISUAL_LANGUAGE_ANSWER:
+    - If the answers are equivalent, set ANSWERS_MATCH = YES
+    - If they differ, set ANSWERS_MATCH = NO
+
+    Step 3: Determine the More Accurate Answer
+    - If ANSWERS_MATCH = YES: Adopt the shared answer.
+    - If ANSWERS_MATCH = NO and VISUAL_DESCRIPTION_SUFFICIENCY = SUFFICIENT:  Use **all** available evidence (VISUAL_DESCRIPTION, SCENE_DESCRIPTION, SUBTITLES).  Apply the following guidelines based on QUESTION_TYPE ("{question_type}"):
+        - **color**: Verify color information from visual clues or subtitles.
+        - **count**: Confirm object/entity count using visual or textual sources.
+        - **action**: Determine actions from descriptions or visual depiction.
+        - **existence**: Confirm presence/absence of entities based on direct evidence.
+        - **location**: Cross-check spatial terms in the scene and visuals.
+        - **dialogue**: Rely on SUBTITLES as the primary source. Use SCENE_DESCRIPTION for tone/context.
+        - **interaction**: Evaluate described or depicted interactions.
+        - **object**: Rely on explicitly mentioned or shown objects.
+        - **temporal**: Use evidence to confirm sequence or timing.
+        - **yes_no**: Determine based on confirmed facts.
+        - **other**: Consider all evidence together for best judgment.
+
+    - If ANSWERS_MATCH = NO and VISUAL_DESCRIPTION_SUFFICIENCY = INSUFFICIENT:  Exclude the VISUAL_DESCRIPTION entirely.  Compare answers using **only** SCENE_DESCRIPTION and SUBTITLES. Apply the following guidelines based on QUESTION_TYPE ("{question_type}"):
+        - **color**: Verify color using textual descriptions or subtitle mentions only.
+        - **count**: Count entities only using textual evidence.
+        - **action**: Identify actions mentioned in SCENE_DESCRIPTION or SUBTITLES.
+        - **existence**: Confirm using only explicitly mentioned elements.
+        - **location**: Check positional terms from scene text only.
+        - **dialogue**: Use SUBTITLES as the definitive source. Do not alter unless explicitly contradicted.
+        - **interaction**: Use textual descriptions of interactions only.
+        - **object**: Trust object mentions in text. Do not speculate.
+        - **temporal**: Confirm any stated sequences/timing in text.
+        - **yes_no**: Answer strictly based on stated evidence.
+        - **other**: Rely only on SCENE_DESCRIPTION and SUBTITLES for overall judgment.
+
+    Step 5: Confidence Level and Final Answer
+        Evaluate your confidence in the best answer:
+        - MODEL_CONFIDENCE: 1.0 - Very high certainty that the answer is correct based on clear and unambiguous evidence.
+        - MODEL_CONFIDENCE: 0.75 - High confidence that the answer is correct with good supporting evidence.
+        - MODEL_CONFIDENCE: 0.5 - Moderate confidence in the chosen answer.
+        - MODEL_CONFIDENCE: 0.25 - Low confidence in the chosen answer due to clear contradictory evidence.
+        - MODEL_CONFIDENCE: 0.0 - Very certain the chosen answer is incorrect based on definitive evidence.
+
+        IMPORTANT: For dialogue and object questions, you must keep the pure language answer unless you have DEFINITIVE contradictory evidence (MODEL_CONFIDENCE of 0.0).
+
+    Your final response must strictly follow this format:
+    VISUAL_DESCRIPTION_SUFFICIENCY: [SUFFICIENT / INSUFFICIENT]
+    MODEL_CONFIDENCE: [1.0 / 0.75 / 0.5 / 0.25 / 0.0]
+    EXPLANATION: [brief justification]
+    VISUAL_EVIDENCE: [if visual was used, explain which part helped]
+    VISUAL_LANGUAGE_CRITIC_ANSWER: [Your visual_language_critic_answer in a single sentence]
+    """
+
+    for attempt in range(max_retries):
+        try:
+            if is_openai_model:
+                completion = client.chat.completions.create(
+                    model=MODEL_NAME,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": prompt},
+                                {"type": "image_url",
+                                 "image_url": {"url": f"data:image/gif;base64,{image_base64}"}}
+                            ]
+                        }
+                    ],
+                    max_tokens=1000,
+                    temperature=0.0,
+                )
+                response = completion.choices[0].message.content.strip().lower()
+            else:
+                completion = client.messages.create(
+                    model=MODEL_NAME,
+                    messages=[{
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": prompt},
+                            {"type": "image",
+                             "source": {"type": "base64", "media_type": "image/gif", "data": image_base64}},
+                        ]
+                    }],
+                    max_tokens=1000,
+                    temperature=0.0,
+                )
+                response = completion.content[0].text.strip().lower()
+
+            # Extract response fields using improved regex patterns
+            visual_description_sufficiency_match = re.search(
+                r'VISUAL_DESCRIPTION_SUFFICIENCY:\s*(SUFFICIENT|INSUFFICIENT)', response, re.IGNORECASE)
+            answers_match_match = re.search(r'ANSWERS_MATCH:\s*(YES|NO)', response, re.IGNORECASE)
+            model_confidence_match = re.search(r'MODEL_CONFIDENCE:\s*(1\.0|0\.75|0\.5|0\.25|0\.0)', response,
+                                               re.IGNORECASE)
+            explanation_match = re.search(
+                r'EXPLANATION:\s*(.+?)(?=\nVISUAL_EVIDENCE|\nVISUAL_LANGUAGE_CRITIC_ANSWER|$)', response,
+                re.IGNORECASE | re.DOTALL)
+            visual_evidence_match = re.search(r'VISUAL_EVIDENCE:\s*(.+?)(?=\nVISUAL_LANGUAGE_CRITIC_ANSWER|$)',
+                                              response, re.IGNORECASE | re.DOTALL)
+            visual_language_critic_answer_match = re.search(r'VISUAL_LANGUAGE_CRITIC_ANSWER:\s*(.+)', response,
+                                                            re.IGNORECASE)
+
+            # Parse the matches to get values (with defaults)
+            visual_description_sufficiency = visual_description_sufficiency_match.group(
+                1).strip().upper() if visual_description_sufficiency_match else "INSUFFICIENT"
+            answers_match = answers_match_match.group(1).strip().upper() == "YES" if answers_match_match else False
+            model_confidence = float(model_confidence_match.group(1)) if model_confidence_match else 0.5
+            explanation = explanation_match.group(1).strip() if explanation_match else "No explanation provided"
+            visual_evidence = visual_evidence_match.group(1).strip() if visual_evidence_match else ""
+
+            # Always have a valid visual_language_critic_answer - no fallback, empty is allowed
+            if visual_language_critic_answer_match:
+                visual_language_critic_answer_candidate = visual_language_critic_answer_match.group(1).strip()
+            else:
+                visual_language_critic_answer_candidate = ""
+
+            # Override visual quality if visual agent is disabled
+            if force_poor_visual_description_quality:
+                visual_description_sufficiency = "INSUFFICIENT"
+
+            # Enhanced handling for dialogue-type questions containing quotations
+            is_dialogue = question_type == 'dialogue'
+            contains_quotes = '"' in pure_language_answer or "'" in pure_language_answer
+            asks_what_said = any(
+                x in question.lower() for x in ['what did', 'what was', 'what does', 'say', 'ask', 'tell'])
+
+            if (is_dialogue or asks_what_said) and contains_quotes:
+                visual_description_sufficiency = "INSUFFICIENT"
+
+            if verbose:
+                print("Visual description deemed " + (
+                    "sufficient" if visual_description_sufficiency == "SUFFICIENT" else "insufficient") + ".")
+
+            # Improved sentence extraction with enhanced regex
+            match = re.search(r'^.*?[.!?](?=\s|$)', visual_language_critic_answer_candidate)
+            if match:
+                visual_language_critic_answer_candidate = match.group(0).strip()
+
+            if not visual_language_critic_answer_candidate:
+                visual_language_critic_answer_candidate = ""
+
+            # Improved handling of balanced quote marks
+            quotes_count = visual_language_critic_answer_candidate.count('"')
+            if quotes_count % 2 == 1:
+                # More robust quote balance detection
+                remaining_text = response[response.find(visual_language_critic_answer_candidate) + len(
+                    visual_language_critic_answer_candidate):]
+                next_quote_pos = remaining_text.find('"')
+                if next_quote_pos != -1:
+                    visual_language_critic_answer_candidate += remaining_text[:next_quote_pos + 1]
+
+            # Improved normalization for comparison - preserve internal punctuation
+            pure_language_answer_normalized = re.sub(r'[.!?,;:]+$', '',
+                                                     pure_language_answer).lower().strip() if pure_language_answer else ""
+            visual_language_answer_normalized = re.sub(r'[.!?,;:]+$', '',
+                                                       visual_language_answer).lower().strip() if visual_language_answer else ""
+            visual_language_critic_answer_candidate_normalized = re.sub(r'[.!?,;:]+$', '',
+                                                                        visual_language_critic_answer_candidate).lower().strip() if visual_language_critic_answer_candidate else ""
+
+            # Check for semantic similarity, not just exact string matching
+            pure_lang_words = set(pure_language_answer_normalized.split())
+            candidate_words = set(visual_language_critic_answer_candidate_normalized.split())
+
+            # More nuanced difference detection
+            different_from_pure = pure_language_answer_normalized != visual_language_critic_answer_candidate_normalized
+            # If answers are short, check if they share at least 70% of words
+            if len(pure_lang_words) > 0 and len(candidate_words) > 0:
+                common_words = pure_lang_words.intersection(candidate_words)
+                similarity = len(common_words) / max(len(pure_lang_words), len(candidate_words))
+                if similarity > 0.7:
+                    different_from_pure = False
+
+            different_from_visual = visual_language_answer_normalized != visual_language_critic_answer_candidate_normalized if visual_language_answer else True
+
+            # Expanded invalid answers detection
+            invalid_answers = ['n/a', 'unknown', 'none', 'not', 'na', 'nothing', 'invisible', 'unseen', 'unclear',
+                               'not visible', 'not shown', 'cannot determine']
+            is_invalid = (visual_language_critic_answer_candidate_normalized in invalid_answers) or \
+                         any(phrase in visual_language_critic_answer_candidate_normalized for phrase in invalid_answers)
+
+            # Enhanced handling for dialogue questions - preserve exact quotes
+            is_dialogue = question_type == 'dialogue'
+            is_object = question_type == 'object'
+            contains_quotes = '"' in pure_language_answer if pure_language_answer else False
+            asks_what_said = any(x in question.lower() for x in
+                                 ['what did', 'what was', 'what does', 'say', 'ask', 'tell', 'said', 'asks'])
+
+            # Decision logic for determining final answer
+            if is_invalid:
+                visual_language_critic_answer = pure_language_answer if pure_language_answer else ""
+                changed = False
+                if verbose:
+                    print(
+                        f"Visual language critic answer '{visual_language_critic_answer_candidate}' is invalid. Keeping pure language answer '{pure_language_answer}'.")
+
+            # Enhanced dialogue question handling
+            elif (is_dialogue or asks_what_said) and contains_quotes:
+                # Never change dialogue with quotes unless 0.0 confidence (definitive evidence of error)
+                if model_confidence == 0.0 and different_from_pure:
+                    visual_language_critic_answer = visual_language_critic_answer_candidate
+                    changed = True
+                    if verbose:
+                        print("Dialogue question with definitive evidence of error. Changing answer.")
+                else:
+                    # For dialogue with quotes, preserve the pure language answer
+                    visual_language_critic_answer = pure_language_answer if pure_language_answer else visual_language_critic_answer_candidate
+                    changed = False
+                    if verbose:
+                        print("Dialogue question with quotes. Preserving pure language answer.")
+
+            # Enhanced object question handling
+            elif is_object:
+                # Be extremely conservative with object questions
+                if model_confidence <= 0.0 and different_from_pure:
+                    visual_language_critic_answer = visual_language_critic_answer_candidate
+                    changed = True
+                    if verbose:
+                        print("Object question with definitive evidence of error. Changing answer.")
+                else:
+                    visual_language_critic_answer = pure_language_answer if pure_language_answer else visual_language_critic_answer_candidate
+                    changed = False
+                    if verbose:
+                        print("Object question. Preserving pure language answer unless definitive evidence exists.")
+
+            # Enhanced logic for visual sufficiency handling
+            elif visual_description_sufficiency == "SUFFICIENT" and ENABLE_VISUAL_AGENT:
+                # With sufficient visual description, consider answers_match first
+                if answers_match:
+                    # If answers match semantically, use either one (prefer visual_language_answer if available)
+                    visual_language_critic_answer = visual_language_answer if visual_language_answer else pure_language_answer
+                    changed = False
+                    if verbose:
+                        print("Answers match semantically. Using consistent answer from both methods.")
+                # When answers don't match, consider confidence
+                elif model_confidence >= 0.75:
+                    # High confidence - use the visual language critic answer from the model's assessment
+                    visual_language_critic_answer = visual_language_critic_answer_candidate
+                    # Check if it actually changed from pure language answer
+                    changed = different_from_pure
+                    if verbose:
+                        print(f"Sufficient visual description with high confidence. Using model's assessment.")
+                else:
+                    # Lower confidence - default to pure language answer
+                    visual_language_critic_answer = pure_language_answer if pure_language_answer else visual_language_critic_answer_candidate
+                    changed = False
+                    if verbose:
+                        print(f"Sufficient visual description but lower confidence. Using pure language answer.")
+
+            else:
+                # With insufficient visual description, heavily favor pure_language_answer
+                if model_confidence <= 0.0:
+                    # Only change with definitive evidence of error
+                    visual_language_critic_answer = visual_language_critic_answer_candidate
+                    changed = different_from_pure
+                    if verbose:
+                        print("Insufficient visual description but definitive evidence of error. Changing answer.")
+                else:
+                    # With any higher confidence, keep pure language answer
+                    visual_language_critic_answer = pure_language_answer if pure_language_answer else visual_language_critic_answer_candidate
+                    changed = False
+                    if verbose:
+                        print(
+                            "Insufficient visual description. Keeping pure language answer to avoid incorrect changes.")
+
+            # Final check for empty answer
+            if not visual_language_critic_answer or visual_language_critic_answer.strip() == "":
+                visual_language_critic_answer = visual_language_critic_answer_candidate
+
+            # Final analysis data - include more detailed metrics
+            analysis_data = {
+                'model_confidence': model_confidence,
+                'visual_description_sufficiency': visual_description_sufficiency,
+                'answers_match': answers_match,
+                'explanation': explanation,
+                'visual_evidence': visual_evidence,
+                'changed': changed,
+                'pure_language_answer': pure_language_answer if pure_language_answer else "",
+                'visual_language_answer': visual_language_answer if visual_language_answer else "",
+                'final_answer': visual_language_critic_answer
+            }
+
+            return visual_language_critic_answer, changed, analysis_data
+
+        except Exception as e:
+            if verbose:
+                print(f"Critic agent network error (attempt {attempt + 1}): {str(e)}")
+            traceback.print_exc()
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay * (attempt + 1))
+            continue
+        except Exception as e:
+            if verbose:
+                print(f"Critic agent error (attempt {attempt + 1}): {str(e)}")
+            traceback.print_exc()
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
+
+    if verbose:
+        print("Critic agent failed after multiple attempts. Returning the initial answer.")
+
+    # If all attempts fail, just return the pure_language_answer (which might be empty) and indicate failure
+    return pure_language_answer, False, {}
+
+============================== Results CSV =====================
+
+row_num,qid,video_name,gif_num,question,correct_answer,visual_description,pure_language_answer,visual_language_answer,visual_language_critic_answer,evaluator_scores,accuracy,model_confidence,visual_description_sufficiency,explanation,visual_evidence,changed
+1,383,Pororo_ENGLISH1_1_ep1,14,whtat does eddy ask pororo,he asks pororo what are you doing,"First, Eddy stands outside on the ice with Poby and Loopy, looking toward Pororo. Then, Eddy raises his hand and asks, ""Pororo what are you doing."" Finally, Crong passes by Eddy, Poby, and Loopy, moving in the direction of Pororo.",eddy asks pororo what he is doing.,"eddy asks pororo, ""what are you doing?""","eddy asks pororo, ""what are you doing?""",1.0,1.0,1.0,SUFFICIENT,"the visual description clearly outlines eddy's action of asking pororo what he is doing, which aligns with both the pure language and visual language answers.","the description states that eddy raises his hand and asks pororo, confirming the dialogue.",True
+2,1100,Pororo_ENGLISH1_1_ep10,12,were eddy's friends interested seeing his new toy?,"yes, they ran happily towards the new toy.","First, Pororo stands in the center of the room facing Eddy and Loopy. Then, Crong, who is on Pororo's left, looks up at Pororo with a smile. Next, Eddy, who is on Pororo's right, turns his body slightly towards Pororo while looking at him. Finally, Pororo says ""toy crong"" while gesturing towards Crong and the toy, indicating excitement.","yes, eddy's friends were interested in seeing his new toy as they ran toward it.","yes, eddy's friends were interested in seeing his new toy as they ran toward it excitedly.","yes, eddy's friends were interested in seeing his new toy as they ran toward it excitedly.",1.0,1.0,1.0,SUFFICIENT,"the visual description clearly indicates that eddy's friends are excited and running toward the toy, confirming their interest.","the description states that pororo and crong look at the car and run toward it, which aligns with the friends' interest in eddy's new toy.",False
+3,1090,Pororo_ENGLISH1_1_ep10,4,what did eddy say after getting the book?,"eddy told, "" what should i make today""","First, Eddy stands with a book held in both hands close to his chest. Then, he looks down at the book with a smile on his face. Finally, he raises the book slightly while saying, ""what should I make today.""","eddy said, ""what should i make today?""","eddy said, ""what should i make today?""","eddy said, ""what should i make today?""",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately depicts eddy's actions and dialogue, confirming the content of both the pure language and visual language answers.","the description of eddy holding the book and saying, ""what should i make today?"" aligns perfectly with the dialogue provided.",False
+4,1181,Pororo_ENGLISH1_1_ep11,51,why did pororo look to ground?,because he was sorry.,"First, Loopy stands with her hands on her sides, facing Pororo. Then, Pororo raises his right hand and places it on his head while lowering his head. Finally, Pororo looks down at the ground.","pororo looked to the ground as he lowered his head, possibly feeling shy or contemplative.",pororo looked to the ground after placing his hand on his head and lowering his head.,pororo looked to the ground after placing his hand on his head and lowering his head.,0.75,0.75,0.75,SUFFICIENT,"the visual description accurately depicts pororo's actions of placing his hand on his head and lowering it, which aligns with the question about why he looked to the ground. however, the emotional context (shyness or contemplation) is not explicitly supported by the visual evidence.",the description of pororo lowering his head and placing his hand on it directly supports the action of looking to the ground.,True
+5,1215,Pororo_ENGLISH1_1_ep12,29,what exploded in pororo's face,a bomb box exploded pororo's face,"First, Pororo is sitting at a table, looking directly at Crong with a neutral expression. Then, Crong, who is sitting across from Pororo, has an angry expression and narrows his eyes while looking at Pororo. Suddenly, a bomb box appears in front of Crong, and it explodes, causing a burst of smoke and debris to fly towards Pororo's face. Finally, Pororo's eyes widen in surprise as he is engulfed in the explosion.",a bomb box that crong hid exploded in pororo's face.,"a bomb box that crong hid exploded in pororo's face, engulfing him in smoke and debris.",a bomb box that crong hid exploded in pororo's face.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly outlines the sequence of events leading to the explosion, confirming the accuracy of both answers regarding what exploded in pororo's face.","the description details the moment when the bomb box appears and explodes, directly supporting the answers provided.",False
+6,1222,Pororo_ENGLISH1_1_ep12,36,what does poby ask when he sees eddy,poby asks eddy why is he so jumpy,"First, Poby moves his feet while standing on the ice. Then, he stops and looks around. Finally, he says ""why are you so jumpy"" while maintaining his position.","poby asks eddy, ""why are you so jumpy?""","poby asks eddy, ""why are you so jumpy?""","poby asks eddy, ""why are you so jumpy?""",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately depicts poby's actions and confirms the dialogue he uses, aligning perfectly with the question.","the description of poby moving his feet and then asking ""why are you so jumpy"" directly supports the dialogue presented.",False
+7,1226,Pororo_ENGLISH1_1_ep12,43,what does confess in loopy's house,eddy confesses he placed the box in pororo's house,"First, Eddy stands in Loopy's house with a slight smile, lowering his ears a little. Then, he looks toward Loopy and Pororo, who are both facing him. Pororo is covered in dirt and looks at Eddy while Loopy also gazes in the same direction. Finally, Eddy says, ""to be honest with you I placed the box there"" while maintaining his smile and posture.",eddy confesses that he placed the box there.,"eddy confesses in loopy's house that he placed the box there, while smiling and addressing loopy and pororo.","eddy confesses in loopy's house that he placed the box there, while smiling and addressing loopy and pororo.",1.0,1.0,1.0,SUFFICIENT,"the visual description accurately captures the context of eddy's confession, including his actions, expressions, and the presence of loopy and pororo, which aligns with the question.",the description of eddy smiling and addressing loopy and pororo while confessing provides clear visual context for the action.,True
+8,1232,Pororo_ENGLISH1_1_ep12,49,what does pororo say to crong after he realizes it was eddy and not crong,pororo apologizes to crong and says he made a mistake,"First, Pororo lowers his head and looks at the ground. Then, he raises his head and looks directly at Crong. Finally, Pororo says ""Crong, I apologize, I made a mistake"" while maintaining eye contact with Crong. Crong looks at Pororo and closes his eyes during this exchange. Loopy is present, observing the interaction.","""crong, i apologize, i made a mistake.""","""crong, i apologize, i made a mistake.""","""crong, i apologize, i made a mistake.""",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately captures the interaction between pororo and crong, confirming the dialogue presented in both the pure language and visual language answers.","the description of pororo lowering his head, looking at crong, and then apologizing aligns with the dialogue provided.",False
+9,1258,Pororo_ENGLISH1_1_ep13,12,did eddy stay longer after agreeing to sing,"no, he left right away","First, Eddy sits at a table with a wide smile on his face. Then, he leans forward slightly, raising his hands in a gesture of excitement. Finally, he continues to smile while looking directly at the camera, indicating a cheerful demeanor.","eddy did not stay longer after agreeing to sing, as he stated he was going to leave.","eddy did not stay longer after agreeing to sing, as he indicated he was going to leave.","eddy did not stay longer after agreeing to sing, as he stated he was going to leave.",1.0,1.0,1.0,SUFFICIENT,"the visual description indicates eddy's cheerful demeanor and gestures of excitement, which align with the context of him agreeing to sing but ultimately deciding to leave, as supported by the subtitles.","the description of eddy smiling and leaning forward suggests engagement, but the final action of him standing up indicates he is leaving.",False
+10,1283,Pororo_ENGLISH1_1_ep13,41,did eddy's entrance impress the audience,"yes, they were all surprised and clapped","First, Poby stands in the foreground with his hands raised, looking directly at the camera. Then, Loopy and Pororo appear in the background, both clapping their hands. Poby continues to hold his hands up while smiling. Finally, the characters maintain their positions, and the scene conveys a sense of excitement as they engage in clapping.","eddy's entrance impressed the audience, as indicated by poby, loopy, and pororo clapping and expressing excitement.","eddy's entrance impressed the audience, as evidenced by poby, loopy, and pororo clapping and expressing excitement.","eddy's entrance impressed the audience, as evidenced by poby, loopy, and pororo clapping and expressing excitement.",1.0,1.0,1.0,SUFFICIENT,"the visual description clearly depicts the characters clapping and expressing excitement, directly supporting the claim that eddy's entrance impressed the audience.","the description of poby, loopy, and pororo clapping and showing excitement aligns with the overall impression of the audience.",False
+11,711,Pororo_ENGLISH1_1_ep2,16,did crong score after he shot the ball at the hoop?,no he did not score,"First, the basketball is seen approaching the hoop. Then, it hits the rim and bounces off. Finally, the ball rolls away from the hoop, indicating that Crong missed the shot.",crong did not score after he shot the ball at the hoop.,crong did not score after he shot the ball at the hoop.,crong did not score after he shot the ball at the hoop.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly indicates that the basketball hits the rim and bounces off, confirming that crong did not score. this aligns with both the pure language and visual language answers.",the description of the basketball hitting the rim and rolling away directly supports the conclusion that crong missed the shot.,False
+12,716,Pororo_ENGLISH1_1_ep2,19,does pororo apologize for knocking poby's things down,yes he says he is sorry and offers to clean it up,"First, Pororo looks up at Poby with his eyes closed and a slight smile. Then, he raises his right hand and gestures toward the ground. Finally, he says, ""oh sorry poby I will clean it up"" while maintaining eye contact with Poby.","yes, pororo apologizes to poby for knocking his things down.","yes, pororo apologizes to poby for knocking his things down.","yes, pororo apologizes to poby for knocking his things down.",1.0,1.0,1.0,SUFFICIENT,"the visual description clearly depicts pororo apologizing to poby, aligning with the question about whether he apologizes for knocking down poby's things. the dialogue in the subtitles supports this action.","the description of pororo looking at poby, raising his hand, and saying ""oh sorry poby i will clean it up"" directly illustrates the apology.",False
+13,730,Pororo_ENGLISH1_1_ep2,26,after the camera is broken what does eddy tell poby they are going to do,eddy says we are going to leave now,"First, Eddy stands next to Poby, who is facing him. Then, Eddy raises his hand and gestures while saying, ""Poby, we are going to leave now."" Meanwhile, Poby remains still, looking at Eddy. Finally, Loopy is positioned slightly behind Eddy, observing the interaction.","eddy tells poby, ""we are going to leave now.""","eddy tells poby, ""poby, we are going to leave now.""","eddy tells poby, ""we are going to leave now.""",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately depicts eddy's dialogue with poby and confirms the action of leaving, aligning with both the pure language and visual language answers.",the description of eddy gesturing and speaking to poby directly supports the dialogue provided.,False
+14,738,Pororo_ENGLISH1_1_ep2,30,what does pororo almost forget to leave with poby,the broken camera piece,"First, Pororo places a camera on the floor while facing Poby. Then, he turns around and begins to walk away from the camera. Poby remains standing still, facing Pororo. Finally, Pororo exits the scene, leaving the camera behind.",pororo almost forgets to leave with the camera.,pororo almost forgets to leave the camera behind with poby.,pororo almost forgets to leave the camera behind with poby.,0.5,0.5,1.0,SUFFICIENT,"the visual description clearly outlines the action of pororo leaving the camera behind, which directly answers the question.","the description states that pororo places the camera on the floor and then walks away, confirming the action of forgetting the camera.",False
+15,912,Pororo_ENGLISH1_1_ep5,41,how did pororo feel after seeing that the flower has wilted,he was very upset,"First, the dandelion flower is shown in a pot, visibly wilted with brown petals. Then, the camera focuses on the flower as it remains still in front of the window. Finally, the scene emphasizes the wilted state of the flower, highlighting its drooping posture.",pororo felt sad after seeing that the flower had wilted.,pororo felt sad and concerned after seeing that the flower had wilted.,pororo felt sad and concerned after seeing that the flower had wilted.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly depicts the wilted state of the flower, which aligns with pororo's emotional response of sadness.",the description of the flower's brown petals and drooping posture directly supports the emotional context of pororo feeling sad.,False
+16,925,Pororo_ENGLISH1_1_ep6,2,when and who will go to picnic,loopy is going to picnic tomorrow for fun,"First, Loopy stands at a table wearing a chef hat. Then, she smiles and stirs a bowl with a spoon. While stirring, Loopy looks directly at the camera. Finally, she continues to stir the bowl, indicating she is preparing food.",loopy will go on a picnic tomorrow.,loopy will go on a picnic tomorrow.,loopy will go on a picnic tomorrow.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly indicates that loopy is preparing food for a picnic tomorrow, aligning perfectly with the question about who will go on a picnic and when.",the description of loopy cooking and the mention of the picnic in both the scene and subtitles support the answer.,False
+17,946,Pororo_ENGLISH1_1_ep6,23,why is crong scared of pororo?,"crong is scared because it is dark, he doesn't have a lantern and his mind is playing tricks on him","First, Crong stands with a surprised expression, opening his mouth wide. Then, he shakes his head from side to side while holding a lamp in his left hand. Finally, the lamp goes out as he continues to look around, maintaining his surprised posture.",crong is scared of pororo because he is surprised and holding a lamp that has gone out in a dark environment.,"crong is scared of pororo because he is surprised and anxious in the dark, especially when his lamp goes out.","crong is scared of pororo because he is surprised and anxious in the dark, especially when his lamp goes out.",0.75,0.75,1.0,SUFFICIENT,"the visual description accurately captures crong's surprised expression and his actions with the lamp, which directly relate to why he is scared of pororo.",the description of crong's surprised expression and the lamp going out supports the understanding of his fear in the dark.,True
+18,928,Pororo_ENGLISH1_1_ep6,4,what seasoning does loopy add to her mixing bowl,loopy adds some salt,"First, Loopy holds a salt bottle above the mixing bowl. Then, she tilts the salt bottle to pour a small amount of salt into the bowl. Finally, she returns the salt bottle to a resting position while continuing to mix the contents in the bowl.",loopy adds a little salt to her mixing bowl.,loopy adds a little salt to her mixing bowl.,loopy adds a little salt to her mixing bowl.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly outlines the action of loopy adding salt to the mixing bowl, which directly answers the question.","the description details loopy holding a salt bottle and pouring salt into the bowl, confirming the action.",False
+19,965,Pororo_ENGLISH1_1_ep6,43,what does eddy think happened to the ghost,"eddy thinks the ghosts must have ran away after they saw eddy, loopy and poby","First, Eddy stands with a wide smile, looking directly at the camera. Then, he raises his arms slightly and tilts his head back, maintaining his cheerful expression. Finally, he closes his eyes and tilts his head to the side, still smiling broadly.","eddy thinks the ghost must have run away after it saw him, poby, and loopy.","eddy thinks the ghost must have run away after seeing him, poby, and loopy.","eddy thinks the ghost must have run away after seeing him, poby, and loopy.",1.0,1.0,1.0,SUFFICIENT,the visual description aligns well with the context of eddy's cheerful demeanor and supports the idea that he is discussing the ghost's actions.,eddy's wide smile and cheerful expression indicate his positive interpretation of the ghost's actions.,False
+20,1052,Pororo_ENGLISH1_1_ep9,16,what do loopy's friends do when they're inside?,they share a snack at the table,"First, Loopy sits at the table, holding a glass of juice and smiling. Then, Crong stands next to her, looking at the table. Poby is positioned to the left of Loopy, also holding a glass of juice and smiling. Eddy is in the background, standing behind Poby and Crong, looking toward the table. 
+
+While Crong says ""crong,"" he appears to be looking at Loopy and gesturing slightly with his hands. Loopy continues to smile while looking at Crong. Poby raises his glass slightly as if to toast, maintaining a cheerful expression. Eddy remains in the background, observing the scene. 
+
+The characters are all engaged in a relaxed gathering, with visible interactions as they drink juice and communicate.","loopy's friends, pororo, crong, poby, and eddy, sit around the table drinking juice.","loopy's friends, pororo, crong, poby, and eddy, sit around the table drinking juice and enjoying each other's company.","loopy's friends, pororo, crong, poby, and eddy, sit around the table drinking juice and enjoying each other's company.",1.0,1.0,1.0,SUFFICIENT,"the visual description provides a clear depiction of loopy and her friends engaging in the action of drinking juice and interacting, which directly answers the question.","the description details the characters sitting around the table, holding glasses of juice, and interacting with each other, confirming the actions described in the answers.",False
+21,1857,Pororo_ENGLISH1_2_ep10,14,what did pororo ask to loopy,"pororo asked ""what was it that you did a minute ago""","First, Pororo stands facing Loopy, who is slightly further away. Then, Pororo tilts his head slightly and asks, ""what was it that you did a minute ago"" while looking directly at Loopy. Meanwhile, Loopy raises her hand to her face, touching it gently. Finally, Loopy looks at Pororo while maintaining her hand on her face.","pororo asked loopy, ""what was it that you did a minute ago?""","pororo asked loopy, ""what was it that you did a minute ago?""","pororo asked loopy, ""what was it that you did a minute ago?""",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately depicts the interaction between pororo and loopy, confirming the dialogue in the question.","the description details pororo asking loopy about her previous action while she touches her face, aligning with the dialogue.",False
+22,1435,Pororo_ENGLISH1_2_ep2,17,"how say to loopy ""i could not sleep""",poby said to loopy that he could not sleep,"First, Poby stands outside and scratches his head with his right paw. Then, he lowers his paw back down to his side. While doing this, he says, ""I could not sleep.""","loopy, i could not sleep.","loopy, i could not sleep.","loopy, i could not sleep.",0.5,0.5,1.0,SUFFICIENT,"the visual description accurately depicts poby's action of scratching his head and stating ""i could not sleep,"" which aligns perfectly with the question.","the description of poby scratching his head and then saying ""i could not sleep"" directly supports the dialogue.",False
+23,1441,Pororo_ENGLISH1_2_ep2,23,what did poby's friend decide,poby's friend decided to help poby to get some sleep,"First, Poby stands with his arms outstretched and eyes closed, appearing to be in a relaxed position. Then, he tilts his head slightly to the side while maintaining his stance. Finally, he smiles broadly, indicating a cheerful demeanor.",eddy decided that they need to help poby get some sleep.,eddy decided that they need to help poby get some sleep.,eddy decided that they need to help poby get some sleep.,1.0,1.0,1.0,SUFFICIENT,"the visual description supports the action of poby being relaxed and cheerful, aligning with eddy's decision to help him get some sleep.","poby's relaxed stance and cheerful demeanor indicate he is in need of help to sleep, which aligns with eddy's decision.",False
+24,1572,Pororo_ENGLISH1_2_ep5,19,who interrupts eddy as he was saying hello to loopy,pororo interrupts eddy as he was saying hello to loopy,"First, Pororo stands upright and raises his left arm. Then, Crong slides down from behind Pororo. Finally, Pororo looks toward Crong while saying, ""hey why did not you move.""",crong interrupts eddy as he was saying hello to loopy.,crong interrupts eddy as he was saying hello to loopy.,crong interrupts eddy as he was saying hello to loopy.,0.0,0.0,1.0,SUFFICIENT,"the visual description clearly indicates that crong interrupts eddy while he is saying hello to loopy, aligning with the provided answers.",the description of crong sliding down behind pororo supports the action of interruption.,False
+25,1579,Pororo_ENGLISH1_2_ep5,26,what did loopy propose to the group after telling them about the flower,loopy proposed that they should ask her anything,"First, Loopy stands in the center of the scene, smiling while holding a vase with flowers in it. Then, she raises the vase slightly and looks toward Eddy and Pororo, who are sitting on the ground. Finally, Loopy says, ""so go ahead ask me anything"" while maintaining her smile and holding the vase in front of her.",loopy proposed that the group ask him anything about the flower he was holding.,loopy proposed to the group to ask her anything while holding the vase with flowers.,loopy proposed to the group to ask her anything while holding the vase with flowers.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly depicts loopy holding a vase with flowers and inviting the group to ask questions, aligning perfectly with the question asked.","the description of loopy smiling and holding the vase while saying, ""so go ahead ask me anything,"" directly supports the proposed action.",True
+26,1762,Pororo_ENGLISH1_2_ep8,43,what did pororo think next?,pororo thought next: wjat should i do?,"First, Pororo stands with a slight frown, looking slightly to the side. Then, he raises his eyebrows and tilts his head slightly while saying, ""what should I do."" Finally, he lowers his head and looks down, maintaining a sad expression.",pororo thought he needed to come up with a plan to cheer up crong.,pororo thought he needed to find a way to cheer up crong and himself.,pororo thought he needed to come up with a plan to cheer up crong.,0.5,0.5,0.75,SUFFICIENT,"the visual description provides relevant context about pororo's expressions and thoughts, indicating he is contemplating how to cheer up crong, which aligns with both answers. however, the slight difference in wording between the answers leads to a lower confidence level.","the description of pororo's expressions and dialogue (""what should i do"") supports the idea that he is thinking about how to cheer up crong.",False
+27,1767,Pororo_ENGLISH1_2_ep8,48,"what did poby, eddy and loopy tell pororo and crong?","poby, eddy and loopy told pororo and crong that they were there to save them.","First, Poby, Eddy, and Loopy are positioned at the edge of a hole, looking down. Then, Poby opens his mouth wide, appearing to shout or call out. Eddy stands next to Poby, looking down with a focused expression. Loopy is also beside them, her eyes wide and her mouth open, indicating she is speaking. 
+
+While they are looking down, they collectively express the dialogue: ""we are here to save you.""","loopy, poby, and eddy told pororo and crong, ""we are here to save you.""","poby, eddy, and loopy told pororo and crong, ""we are here to save you.""","loopy, poby, and eddy told pororo and crong, ""we are here to save you.""",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately depicts the characters and their actions, confirming the dialogue they express.","the description of poby, eddy, and loopy looking down and expressing the dialogue ""we are here to save you"" aligns perfectly with the visual scene.",False
+28,1768,Pororo_ENGLISH1_2_ep8,49,what did loopy tell pororo and crong?,loopy told pororo and crong that they couldn't play a trick on her.,"First, Loopy is smiling and facing the camera. Then, she raises her hands to her mouth while sticking out her tongue. Finally, she says, ""did you think you could play a trick on me"" while maintaining her smile and playful posture.","loopy told pororo and crong, ""did you think you could play a trick on me?""",loopy playfully asked pororo and crong if they thought they could play a trick on her.,"loopy told pororo and crong, ""did you think you could play a trick on me?""",0.75,0.75,1.0,INSUFFICIENT,"the visual description accurately captures loopy's playful demeanor and her dialogue, aligning well with the question.","the description of loopy smiling, raising her hands, and sticking out her tongue supports the playful tone of her question.",False
+29,2079,Pororo_ENGLISH1_3_ep1,15,what does pororo think eddy is hiding?,pororo thinks eddy is hiding some kind of treasure.,"First, Pororo stands with his arms crossed and a slight tilt of his head, looking at Eddy. Then, he raises one eyebrow and narrows his eyes while maintaining a suspicious expression. Finally, Pororo says, ""why are you hiding it as if it is some kind of treasure"" while continuing to look intently at Eddy.",pororo thinks eddy is hiding the map because he believes it is some kind of treasure.,pororo thinks eddy is hiding the map because he suspects it might be some kind of treasure.,pororo thinks eddy is hiding the map because he suspects it might be some kind of treasure.,0.75,0.75,1.0,SUFFICIENT,"the visual description clearly illustrates pororo's actions and expressions, which align with the context of the question about what he thinks eddy is hiding.",pororo's suspicious expression and dialogue directly support the claim that he believes eddy is hiding something valuable.,False
+30,2513,Pororo_ENGLISH1_3_ep11,1,what did pororo see moving?,pororo saw the magnet moving.,"First, Pororo is sitting on a green sofa with a book open on his lap. Then, he looks down at the floor, focusing on something moving. Finally, he raises his head slightly and watches the wind-up toy as it moves across the floor. 
+
+While observing the toy, Pororo says, ""the doll is moving.""",pororo saw a wind-up toy moving on the floor.,pororo saw a wind-up toy moving on the floor.,pororo saw a wind-up toy moving on the floor.,0.25,0.25,1.0,SUFFICIENT,"the visual description clearly details pororo observing a wind-up toy moving on the floor, which directly answers the question.",the part where pororo looks down at the floor and watches the wind-up toy moving supports the answer.,False
+31,2575,Pororo_ENGLISH1_3_ep12,16,who does loopy give a sandwich to?,loopy gives a sandwich to eddy,"First, Loopy holds a sandwich in her right hand while smiling. Then, she extends her arm toward Eddy, offering the sandwich. Finally, Eddy reaches out with his robot arm to pick up the sandwich from Loopy's hand.",loopy gives a sandwich to eddy.,loopy gives a sandwich to eddy.,loopy gives a sandwich to eddy.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly depicts loopy offering a sandwich to eddy, confirming the action described in both the pure language and visual language answers.",the description of loopy holding the sandwich and extending her arm towards eddy directly supports the action of giving the sandwich.,False
+32,2582,Pororo_ENGLISH1_3_ep12,24,what does loopy ask eddy?,"loopy asks eddy ""what happened?""","First, Loopy stands with her hands on her hips, looking toward Eddy. Then, she tilts her head slightly and asks, ""Eddy, what happened?"" while maintaining eye contact with him. Meanwhile, Poby, Crong, and Pororo are positioned nearby, watching Eddy and the robot. Poby has a neutral expression, Crong appears curious, and Pororo looks attentive as they observe the scene.","loopy asks eddy, ""what happened?""","loopy asks eddy, ""eddy, what happened?"" while observing him and the robot.","loopy asks eddy, ""what happened?""",1.0,1.0,1.0,INSUFFICIENT,"the visual description provides a clear context of loopy's interaction with eddy, confirming her question and the surrounding characters' reactions.","the description details loopy's posture and dialogue, which aligns with the question asked.",False
+33,2623,Pororo_ENGLISH1_3_ep13,18,how did everybody feel when seeing crong clean out the house,everybody felt surprised to see crong cleaning the house,"First, Crong is seen standing in the center of the room, looking down at a small piece of debris on the floor. Then, he bends down and picks up the debris with both hands. After that, he stands up straight and smiles, looking pleased with his action. Meanwhile, Pororo is positioned to the side, leaning slightly toward Loopy, who is also nearby. Pororo appears to be whispering something to Loopy while looking at Crong. 
+
+Throughout this sequence, Crong's movements are focused on cleaning, while Pororo's posture indicates he is engaged in a conversation with Loopy.",everyone felt amused and entertained watching crong enthusiastically clean the house while pororo and loopy shared a secret moment.,"everyone felt amused and pleased watching crong happily clean the house, while pororo and loopy shared a secretive conversation.",everyone felt amused and entertained watching crong enthusiastically clean the house while pororo and loopy shared a secret moment.,0.75,0.75,1.0,SUFFICIENT,"the visual description provides a clear depiction of crong cleaning and the interactions between pororo and loopy, aligning well with the question about how everyone felt.",the description of crong's actions and the secretive conversation between pororo and loopy supports the overall sentiment of amusement and entertainment.,False
+34,2173,Pororo_ENGLISH1_3_ep2,49,what was crong playing with as pororo entered the house,crong was playing with a snowboard,"### Task 1 - Structured Scene Understanding:
+{
+  ""objects"": [
+    {""name"": ""house"", ""attributes"": [""igloo-shaped"", ""snow-covered""], ""location"": [""center"", ""center""]},
+    {""name"": ""snow"", ""attributes"": [""falling"", ""covering ground""], ""location"": [""foreground"", ""center""]}
+  ],
+  ""actions"": [
+    {""subject"": ""Pororo"", ""action"": ""looking"", ""object"": ""Crong""}
+  ],
+  ""relationships"": [
+    {""subject"": ""Pororo"", ""relation"": ""near"", ""object"": ""house""}
+  ],
+  ""uncertain"": [
+    {""description"": ""Crong's activity"", ""location"": [""foreground"", ""center""]}
+  ]
+}
+
+### Task 2 - Region-based Captions:
+{
+  ""left"": ""The left region is empty with snow-covered ground."",
+  ""center"": ""The center region features the igloo-shaped house and falling snow."",
+  ""right"": ""The right region is empty with snow-covered ground."",
+  ""foreground"": ""The foreground shows snow covering the ground."",
+  ""background"": ""The background has a snowy landscape with trees.""
+}",crong was playing with a toy as pororo entered the house.,crong was playing with something unspecified as pororo entered the house.,crong was playing with a toy as pororo entered the house.,0.5,0.5,0.5,INSUFFICIENT,"the visual description does not provide specific information about what crong was playing with, making it insufficient to answer the question accurately.","the visual description mentions crong's activity as uncertain, which does not clarify the object involved.",False
+35,2206,Pororo_ENGLISH1_3_ep3,31,what did pororo answer to loopy and crong,"pororo said ""uh well""","First, Pororo stands in the foreground with his arms outstretched and a surprised expression on his face. Then, he turns his body slightly to the right while maintaining his arm position. Finally, he says ""uh well"" while looking towards Loopy and Crong, who are positioned in the background.","pororo answered, ""uh well,"" while moving his arms and turning around.","pororo answered loopy and crong with ""uh well"" while looking surprised and gesturing with his arms.","pororo answered, ""uh well,"" while moving his arms and turning around.",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately depicts pororo's actions and expressions while he responds, aligning well with the dialogue provided in both answers.",the description of pororo's surprised expression and arm gestures directly supports the dialogue he delivers.,False
+36,2291,Pororo_ENGLISH1_3_ep4,45,whom did eddy say sorry to,eddy said sorry to pororo,"### Task 1 - Structured Scene Understanding:
+{
+  ""objects"": [
+    {""name"": ""Eddy"", ""attributes"": [""standing"", ""apologetic""], ""location"": [""foreground"", ""center""]},
+    {""name"": ""Pororo"", ""attributes"": [""smiling"", ""friendly""], ""location"": [""foreground"", ""left""]},
+    {""name"": ""snowman"", ""attributes"": [""frosty"", ""decorated""], ""location"": [""background"", ""center""]}
+  ],
+  ""actions"": [
+    {""subject"": ""Eddy"", ""action"": ""apologizes"", ""object"": ""Pororo""}
+  ],
+  ""relationships"": [
+    {""subject"": ""Eddy"", ""relation"": ""next to"", ""object"": ""snowman""},
+    {""subject"": ""Eddy"", ""relation"": ""looking at"", ""object"": ""Pororo""},
+    {""subject"": ""Pororo"", ""relation"": ""looking at"", ""object"": ""Eddy""}
+  ],
+  ""uncertain"": []
+}
+
+### Task 2 - Region-based Captions:
+{
+  ""left"": ""Pororo is smiling and looking at Eddy."",
+  ""center"": ""Eddy is standing next to a snowman and is apologizing."",
+  ""right"": ""Empty or unclear."",
+  ""foreground"": ""Eddy and Pororo are in the foreground, interacting."",
+  ""background"": ""A snowman is visible in the background.""
+}",eddy said sorry to pororo for doubting him.,eddy said sorry to pororo for doubting him.,eddy said sorry to pororo for doubting him.,1.0,1.0,1.0,SUFFICIENT,"the visual description clearly indicates that eddy is apologizing to pororo, which directly answers the question.",the actions and relationships described in the visual description confirm that eddy is apologizing to pororo.,False
+37,2298,Pororo_ENGLISH1_3_ep5,1,what was the friends are doing when pororo came with crong?,the friends were talking about something secretly.,"First, Eddy stands in front of Loopy and Poby, gesturing with his hands as he explains something. Then, Loopy claps her hands together while looking at Eddy, showing enthusiasm. Poby nods his head in agreement while maintaining eye contact with Eddy. The three characters are gathered closely together, indicating a private conversation.","eddy, loopy, and poby were secretly discussing something when pororo arrived with crong.","eddy, loopy, and poby were secretly discussing something, with eddy explaining while loopy clapped and poby nodded in agreement when pororo and crong arrived.","eddy, loopy, and poby were secretly discussing something, with eddy explaining while loopy clapped and poby nodded in agreement when pororo and crong arrived.",1.0,1.0,1.0,SUFFICIENT,"the visual_description provides a clear depiction of the characters' actions and interactions, confirming that eddy, loopy, and poby were engaged in a discussion before pororo and crong arrived.",the description of eddy explaining while loopy claps and poby nods supports the actions described in the answers.,True
+38,2333,Pororo_ENGLISH1_3_ep5,25,does the friends find pororo behind the snow man?,the friends find pororo behind the snow man.,"First, Loopy, Poby, Crong, and Eddy stand together in the snow, facing toward the camera. Then, they all wave their hands while smiling. Finally, they say ""bye Pororo"" while continuing to wave at the camera. 
+
+There is no visible action indicating that they find Pororo behind the snowman.","no, the friends do not find pororo behind the snowman.","no, the friends do not find pororo behind the snowman.","no, the friends do not find pororo behind the snowman.",0.0,0.0,1.0,SUFFICIENT,the visual description clearly indicates that the friends are waving goodbye to pororo and does not suggest that they find him behind the snowman.,"the description states that the friends are smiling and waving while saying ""bye pororo,"" which confirms their actions and intentions.",False
+39,2425,Pororo_ENGLISH1_3_ep7,25,"what does crong do when pororo says ""come here""",crong runs away from pororo,"First, Pororo stands with his arms crossed and a serious expression on his face. Then, he looks directly at Crong and says ""come here"" while maintaining his posture. Finally, Crong, who is positioned slightly away from Pororo, turns his head and attempts to run away in the opposite direction.","when pororo says ""come here,"" crong tries to run away again.","when pororo says ""come here,"" crong turns his head and attempts to run away in the opposite direction.","when pororo says ""come here,"" crong tries to run away again.",1.0,1.0,0.75,INSUFFICIENT,"the visual description accurately depicts the interaction between pororo and crong, confirming that crong attempts to run away when pororo says ""come here."" however, the slight difference in phrasing between the answers leads to a lower confidence level.",the description of pororo's serious expression and crong's action of turning his head and attempting to run away supports the analysis of their interaction.,False
+40,2446,Pororo_ENGLISH1_3_ep7,47,what does poby say when invited to play,"he says ""of course""","First, Poby stands on a snowy path, holding a fishing rod. Then, he looks ahead and smiles, dropping the fishing rod to the ground. Finally, Poby raises his arms and says ""of course"" while moving forward to join his friends.","poby says, ""of course,"" when invited to play.","poby smiles and says, ""of course,"" as he drops his fishing rod to join his friends.","poby says, ""of course,"" when invited to play.",1.0,1.0,1.0,INSUFFICIENT,"the visual description accurately depicts poby's actions and dialogue when invited to play, aligning with the question.","the description details poby smiling, dropping his fishing rod, and saying ""of course,"" which directly supports the dialogue.",False
+41,Average,,,,,,,,,,0.85,0.96875,,,,6/40
