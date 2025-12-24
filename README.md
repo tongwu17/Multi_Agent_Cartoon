@@ -34,11 +34,9 @@ Multi_Agent_Cartoon/
 │   ├── blip2/                            # BLIP-2 model results
 │   │   ├── ablation/                     # BLIP-2 ablation studies
 │   │   ├── analysis/                     # BLIP-2 detailed analysis
-│   │   ├── comparison/                   # BLIP-2 comparisons
-│   │   └── saved_figures/                # BLIP-2 visualizations
+│   │   └── comparison/                   # BLIP-2 comparisons
 │   ├── comparison/                       # Cross-method comparisons
-│   ├── metrics/                          # Evaluation metric scores
-│   └── saved_figures/                    # Generated visualizations
+│   └── metrics/                          # Evaluation metric scores
 │
 ├── compute_BLEU_ROUGE_METEOR_scores.ipynb # Metric computation
 ├── pororo_ablation_study.ipynb           # Pororo multi-agent ablation 
@@ -64,7 +62,7 @@ Multi_Agent_Cartoon/
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/tongwu17/Multi_Agent_Cartoon.git
+git clone <repository-url>
 cd Multi_Agent_Cartoon
 ```
 
@@ -101,10 +99,8 @@ Or set as environment variables:
 ```bash
 # On macOS/Linux:
 export OPENAI_API_KEY=your_openai_api_key_here
-```
 
-On Windows:
-```bash
+# On Windows:
 set OPENAI_API_KEY=your_openai_api_key_here
 ```
 
@@ -148,12 +144,8 @@ ENABLE_CRITIC_AGENT = False
 Choose your preferred model:
 
 ```python
-# OpenAI Models (default)
-MODEL_NAME = "gpt-4o-mini"              # Used for all agents (Visual, Language, Critic)
-
-# Alternative: Anthropic Claude Models
-# MODEL_NAME = "claude-3-5-sonnet-20241022"
-# MODEL_NAME = "claude-3-5-haiku-20241022"
+# OpenAI Models
+MODEL_NAME = "gpt-4o-mini"
 ```
 
 ## Evaluation Metrics
@@ -166,7 +158,7 @@ The project includes comprehensive evaluation using:
 - **BLEURT**: Neural metric for semantic similarity
 
 Run evaluation:
-```bash
+```
 jupyter notebook compute_BLEU_ROUGE_METEOR_scores.ipynb
 ```
 
