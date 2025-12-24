@@ -1,0 +1,3 @@
+Configuration,Accuracy
+Visual + Language (BLIP2),0.7438
+Visual + Language + Critic (BLIP2),0.8000

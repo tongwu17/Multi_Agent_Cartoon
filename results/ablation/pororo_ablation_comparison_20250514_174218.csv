@@ -1,5 +1,0 @@
-Configuration,Accuracy
-Language Only,0.80625
-Visual + Language,0.83125
-Language + Critic,0.8125
-Visual + Language + Critic,0.825

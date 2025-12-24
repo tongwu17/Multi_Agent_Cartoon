@@ -1,0 +1,38 @@
+row_num,question_id,image_path,question,answer_type,correct_answer,blip2_visual_description,visual_language_answer,evaluator_scores,accuracy
+1,77311,S27E11-05901.jpg,what is on the shelf?,other,book,a bookcase,books,"1.0, 1.0, 1.0",1.0
+2,12809,S24E12-26951.jpg,how many people are in the picture?,number,1,a single person,1,"1.0, 1.0, 1.0",1.0
+3,1214,S26E11-03301.jpg,are the people sitting or standing?,other,standing,seated,seated,"0.0, 0.0, 0.0",0.0
+4,88112,S27E20-04751.jpg,what is the group of people doing?,other,standing,walking down a hallway,traveling,"0.25, 0.25, 0.25",0.25
+5,36705,S27E21-07251.jpg,what are the buildings made of?,other,brick,a man is standing in front of a trash can,brick,"1.0, 1.0, 1.0",1.0
+6,33098,S25E20-05851.jpg,is there a toy in the picture?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+7,30161,S28E21-16651.jpg,is there a man on a chair?,yes/no,yes,no,no,"0.0, 0.0, 0.0",0.0
+8,15712,S26E04-20751.jpg,how many people are there?,number,2,a couple of people are there,2,"1.0, 1.0, 1.0",1.0
+9,87724,S26E11-10751.jpg,what is the girl doing?,other,standing,she is looking at the camera,looking,"0.5, 0.5, 0.5",0.5
+10,12264,S30E19-18201.jpg,how many people are in the image?,number,1,0,1,"1.0, 1.0, 1.0",1.0
+11,81928,S25E21-05701.jpg,what is the character doing?,other,standing,he is standing in the street,hiding,"0.25, 0.25, 0.25",0.25
+12,88069,S26E05-16151.jpg,what is the group of people doing?,other,sitting,watching a movie,watching,"0.5, 0.5, 0.5",0.5
+13,66444,S32E08-00801.jpg,what color suit is the man on the left wearing?,other,blue,a blue suit,blue,"1.0, 1.0, 1.0",1.0
+14,11251,S24E16-21001.jpg,how many people are at the table?,number,2,a couple of people are at the table,2,"1.0, 1.0, 1.0",1.0
+15,71663,S26E14-05851.jpg,what is in the background?,other,sky,a police car,sky,"1.0, 1.0, 1.0",1.0
+16,52604,S26E20-07801.jpg,what color is the man's hat?,other,blue,black,black,"0.0, 0.0, 0.0",0.0
+17,1641,S31E07-02451.jpg,are the people standing or sitting?,other,standing,seated,seated,"0.0, 0.0, 0.0",0.0
+18,1572,S26E18-12451.jpg,are the people standing or sitting?,other,standing,a couple of people standing,standing,"1.0, 1.0, 1.0",1.0
+19,11822,S26E14-15851.jpg,how many people are in the image?,number,2,two,2,"1.0, 1.0, 1.0",1.0
+20,29597,S26E08-04251.jpg,is there a human in the picture?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+21,31735,S29E07-04051.jpg,is there a pool table?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+22,61532,S24E17-07551.jpg,what color is the table?,other,blue,a table is a table,green,"0.25, 0.25, 0.25",0.25
+23,72617,S24E22-03501.jpg,what is in the background?,other,building,a man and woman are walking down a street,buildings,"1.0, 1.0, 1.0",1.0
+24,1386,S32E03-05401.jpg,are the people standing in a line?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+25,68247,S33E13-09001.jpg,what is behind the men?,other,fence,a satanic sat,forest,"0.25, 0.25, 0.25",0.25
+26,26965,S26E13-03351.jpg,is there a bridge in the photo?,yes/no,yes,yes,yes,"1.0, 1.0, 1.0",1.0
+27,85910,S26E02-18151.jpg,what is the color of the sky?,other,blue,a blue sky,blue,"1.0, 1.0, 1.0",1.0
+28,78721,S32E10-00501.jpg,what is on the table?,other,suitcase,a woman is standing in front of a table,suitcase,"1.0, 1.0, 1.0",1.0
+29,84446,S32E15-07801.jpg,what is the color of the man's shirt on the left?,other,blue,a man is standing in front of a curtain,blue,"1.0, 1.0, 1.0",1.0
+30,66434,S32E08-07951.jpg,what color suit is the character wearing?,other,blue,a blue suit,blue,"1.0, 1.0, 1.0",1.0
+31,52356,S24E06-16951.jpg,what color is the man's hair?,other,blue,a man with a blue hair color,blue,"1.0, 1.0, 1.0",1.0
+32,29887,S27E01-04301.jpg,is there a light hanging?,yes/no,yes,i'm not sure,yes,"1.0, 1.0, 1.0",1.0
+33,55433,S29E17-00451.jpg,what color is the man's shirt?,other,white,blue,white,"1.0, 1.0, 1.0",1.0
+34,71583,S33E13-04701.jpg,what is in the background?,other,table,a chess game,gameboard,"0.25, 0.5, 0.5",0.5
+35,37083,S29E10-27951.jpg,what are the men doing?,other,standing,they are standing in front of a curtain,waiting,"0.75, 0.75, 0.5",0.75
+36,96818,S26E21-02601.jpg,what is the person sitting on?,other,chair,a chair,chair,"1.0, 1.0, 1.0",1.0
+37,Average,,,All,"Total Questions: 36, Total Images: 36",,,,0.7569444444444444
